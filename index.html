@@ -202,7 +202,7 @@
   
     <div class="article-meta">
       <a href="/2016/04/10/xx/" class="article-date">
-  	<time datetime="2016-04-09T16:21:56.804Z" itemprop="datePublished">2016-04-10</time>
+  	<time datetime="2016-04-09T16:30:15.695Z" itemprop="datePublished">2016-04-10</time>
 </a>
     </div>
   
@@ -290,7 +290,7 @@ public class ExampleTest extends InstrumentationTestCase {
   
     <div class="article-meta">
       <a href="/2016/04/10/hello-world/" class="article-date">
-  	<time datetime="2016-04-09T16:21:56.802Z" itemprop="datePublished">2016-04-10</time>
+  	<time datetime="2016-04-09T16:30:15.693Z" itemprop="datePublished">2016-04-10</time>
 </a>
     </div>
   
@@ -351,7 +351,7 @@ public class ExampleTest extends InstrumentationTestCase {
   
     <div class="article-meta">
       <a href="/2016/04/10/AS单元测试/" class="article-date">
-  	<time datetime="2016-04-09T16:21:56.796Z" itemprop="datePublished">2016-04-10</time>
+  	<time datetime="2016-04-09T16:30:15.687Z" itemprop="datePublished">2016-04-10</time>
 </a>
     </div>
   
@@ -368,12 +368,16 @@ public class ExampleTest extends InstrumentationTestCase {
 </blockquote>
 <p>对于开发者来说，单元测试（模块测试）是开发者编写的一小段代码，用于检验被测代码的一个很小的、很明确的功能是否正确。</p>
 <p>###AndroidStudio如何使用单元测试</p>
+<blockquote>
 <ol>
-<li>新建一个项目，自动会在包名下创建一个ApplicationTest.java</li>
+<li><p>新建一个项目，自动会在包名下创建一个ApplicationTest.java</p>
+</li>
 <li><p>创建一个<strong>被测试</strong>的类，代码如下：</p>
-<pre><code>package com.zhou.dell.dtest0408_unittest;
-/**
- * author：zh
+</li>
+</ol>
+</blockquote>
+<p>&gt;<br>            package com.zhou.dell.dtest0408_unittest;<br>            /**</p>
+<pre><code> * author：zh
  * version：v1.0
  * date: 2016/4/8
  * description:计算
@@ -383,22 +387,18 @@ public class Compute {
         return a + b ;
     }
 }
-</code></pre></li>
-</ol>
+</code></pre><blockquote>
 <ol>
-<li><p>在ApplicationTest的同级目录下（当然你可以自己创建一个文件夹）创建一个类继承<strong>InstrumentationTestCase</strong>，注意不是Instrumentation，代码如下：</p>
-<pre><code>package com.zhou.dell.dtest0408_unittest;
-
-import android.test.InstrumentationTestCase;
-
-/**
- * author：zh
+<li>在ApplicationTest的同级目录下（当然你可以自己创建一个文件夹）创建一个类继承<strong>InstrumentationTestCase</strong>，注意不是Instrumentation，代码如下：</li>
+</ol>
+</blockquote>
+<p>&gt;<br>            package com.zhou.dell.dtest0408_unittest;<br>            import android.test.InstrumentationTestCase;<br>            /**</p>
+<pre><code> * author：zh
  * version：v1.0
  * date: 2016/4/8
  * description:
  */
 public class ExampleTest extends InstrumentationTestCase {
-
     public void test() throws Exception {
         Compute c = new Compute();
         int expected =4;
@@ -406,13 +406,17 @@ public class ExampleTest extends InstrumentationTestCase {
         assertEquals(expected, reality);
     }
 }
-</code></pre></li>
-<li><p>点击Run-&gt;Edit Configurations-&gt;点击左上角的“+”-&gt;Android Tests，之后会出现如下窗口<br><img src="http://7xsstf.com2.z0.glb.clouddn.com/androidTest.bmp" alt="">然后输入Name,等其他配置点击apply<br><br><br>我的配置如下：<br><img src="http://7xsstf.com2.z0.glb.clouddn.com/ASTest2.bmp" alt=""></p>
-</li>
+</code></pre><blockquote>
+<ol>
+<li>点击Run-&gt;Edit Configurations-&gt;点击左上角的“+”-&gt;Android Tests，之后会出现如下窗口<br><img src="http://7xsstf.com2.z0.glb.clouddn.com/androidTest.bmp" alt="">然后输入Name,等其他配置点击apply<br><br><br>我的配置如下：<br><img src="http://7xsstf.com2.z0.glb.clouddn.com/ASTest2.bmp" alt=""></li>
+</ol>
+<ol>
 <li><p>点击 绿色的三角形 或者 shilft + F10（记得开虚拟机或者连接真机）</p>
 </li>
-<li>由于expected的值和reality的值相同，所以test通过，右下角就会有绿色的进度条，如下图：<br><img src="http://7xsstf.com2.z0.glb.clouddn.com/ASTest4.bmp" alt="">当然如果2个值不一样就会报错，会显示出红色的进度条，并且会有日志提示哪里出错，如图：<br><br><img src="http://7xsstf.com2.z0.glb.clouddn.com/ASTest5.bmp" alt=""></li>
+<li><p>由于expected的值和reality的值相同，所以test通过，右下角就会有绿色的进度条，如下图：<br><img src="http://7xsstf.com2.z0.glb.clouddn.com/ASTest4.bmp" alt="">当然如果2个值不一样就会报错，会显示出红色的进度条，并且会有日志提示哪里出错，如图：<br><br><img src="http://7xsstf.com2.z0.glb.clouddn.com/ASTest5.bmp" alt=""></p>
+</li>
 </ol>
+</blockquote>
 <p>###注意</p>
 <ul>
 <li>这个测试类不一定要和ApplicationTest同级，可以自己新建一个文件夹</li>
