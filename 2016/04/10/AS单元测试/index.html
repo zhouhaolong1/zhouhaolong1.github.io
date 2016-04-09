@@ -11,11 +11,9 @@
 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证。对于单元测试中单元的含义，一般来说，要根据实际情况去判定其具体含义。
 
 对于开发者来说，单元测试（模块测试）是开发者编写的一小段代码，用于检验被测代码的一个很小的、很明确的功能是否正确。
-ddd
-ddd
 ###AndroidStudio如何使用单元测试
 
-新建一个项目，">
+新建一个项目，自动会在包名下创">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://yoursite.com/2016/04/10/AS单元测试/index.html">
@@ -25,16 +23,14 @@ ddd
 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证。对于单元测试中单元的含义，一般来说，要根据实际情况去判定其具体含义。
 
 对于开发者来说，单元测试（模块测试）是开发者编写的一小段代码，用于检验被测代码的一个很小的、很明确的功能是否正确。
-ddd
-ddd
 ###AndroidStudio如何使用单元测试
 
-新建一个项目，">
+新建一个项目，自动会在包名下创">
 <meta property="og:image" content="http://7xsstf.com2.z0.glb.clouddn.com/androidTest.bmp">
 <meta property="og:image" content="http://7xsstf.com2.z0.glb.clouddn.com/ASTest2.bmp">
 <meta property="og:image" content="http://7xsstf.com2.z0.glb.clouddn.com/ASTest4.bmp">
 <meta property="og:image" content="http://7xsstf.com2.z0.glb.clouddn.com/ASTest5.bmp">
-<meta property="og:updated_time" content="2016-04-09T15:56:21.000Z">
+<meta property="og:updated_time" content="2016-04-09T16:16:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
 <meta name="twitter:description" content="##AndroidStudio 进行单元测试
@@ -42,11 +38,9 @@ ddd
 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证。对于单元测试中单元的含义，一般来说，要根据实际情况去判定其具体含义。
 
 对于开发者来说，单元测试（模块测试）是开发者编写的一小段代码，用于检验被测代码的一个很小的、很明确的功能是否正确。
-ddd
-ddd
 ###AndroidStudio如何使用单元测试
 
-新建一个项目，">
+新建一个项目，自动会在包名下创">
 <meta name="twitter:image" content="http://7xsstf.com2.z0.glb.clouddn.com/androidTest.bmp">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -110,7 +104,7 @@ ddd
 						<li>Links</li>
 						
 						
-						<li>Über</li>
+						<li>About</li>
 						
 					</ul>
 				</div>
@@ -233,7 +227,7 @@ ddd
   
     <div class="article-meta">
       <a href="/2016/04/10/AS单元测试/" class="article-date">
-  	<time datetime="2016-04-09T16:11:42.436Z" itemprop="datePublished">2016-04-10</time>
+  	<time datetime="2016-04-09T16:17:41.680Z" itemprop="datePublished">2016-04-10</time>
 </a>
     </div>
   
@@ -249,9 +243,7 @@ ddd
 <p>单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证。对于单元测试中单元的含义，一般来说，要根据实际情况去判定其具体含义。</p>
 </blockquote>
 <p>对于开发者来说，单元测试（模块测试）是开发者编写的一小段代码，用于检验被测代码的一个很小的、很明确的功能是否正确。</p>
-<pre><code>ddd
-ddd
-</code></pre><p>###AndroidStudio如何使用单元测试</p>
+<p>###AndroidStudio如何使用单元测试</p>
 <ol>
 <li>新建一个项目，自动会在包名下创建一个ApplicationTest.java</li>
 <li><p>创建一个<strong>被测试</strong>的类，代码如下：</p>
@@ -265,12 +257,12 @@ ddd
 public class Compute {
     public int add (int a , int b ) {
         return a + b ;
-        }
+    }
 }
 </code></pre></li>
 </ol>
 <ol>
-<li><p>在ApplicationTest的同级目录下（当然你可以自己创建一个文件夹）创建一个类继承<strong>InstrumentationTestCase</strong>，注意不是Instrumentation，代码<code>System.out.println()</code>如下：</p>
+<li><p>在ApplicationTest的同级目录下（当然你可以自己创建一个文件夹）创建一个类继承<strong>InstrumentationTestCase</strong>，注意不是Instrumentation，代码如下：</p>
 <pre><code>package com.zhou.dell.dtest0408_unittest;
 
 import android.test.InstrumentationTestCase;
