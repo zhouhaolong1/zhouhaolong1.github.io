@@ -13,8 +13,7 @@
 对于开发者来说，单元测试（模块测试）是开发者编写的一小段代码，用于检验被测代码的一个很小的、很明确的功能是否正确。
 ###AndroidStudio如何使用单元测试
 
-
-新建一个项目，自动会在包名下">
+新建一个项目，自动会在包名下创">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://yoursite.com/2016/04/10/AS单元测试/index.html">
@@ -26,13 +25,12 @@
 对于开发者来说，单元测试（模块测试）是开发者编写的一小段代码，用于检验被测代码的一个很小的、很明确的功能是否正确。
 ###AndroidStudio如何使用单元测试
 
-
-新建一个项目，自动会在包名下">
+新建一个项目，自动会在包名下创">
 <meta property="og:image" content="http://7xsstf.com2.z0.glb.clouddn.com/androidTest.bmp">
 <meta property="og:image" content="http://7xsstf.com2.z0.glb.clouddn.com/ASTest2.bmp">
 <meta property="og:image" content="http://7xsstf.com2.z0.glb.clouddn.com/ASTest4.bmp">
 <meta property="og:image" content="http://7xsstf.com2.z0.glb.clouddn.com/ASTest5.bmp">
-<meta property="og:updated_time" content="2016-04-09T16:29:40.000Z">
+<meta property="og:updated_time" content="2016-04-09T16:45:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
 <meta name="twitter:description" content="##AndroidStudio 进行单元测试
@@ -42,8 +40,7 @@
 对于开发者来说，单元测试（模块测试）是开发者编写的一小段代码，用于检验被测代码的一个很小的、很明确的功能是否正确。
 ###AndroidStudio如何使用单元测试
 
-
-新建一个项目，自动会在包名下">
+新建一个项目，自动会在包名下创">
 <meta name="twitter:image" content="http://7xsstf.com2.z0.glb.clouddn.com/androidTest.bmp">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -230,7 +227,7 @@
   
     <div class="article-meta">
       <a href="/2016/04/10/AS单元测试/" class="article-date">
-  	<time datetime="2016-04-09T16:39:19.298Z" itemprop="datePublished">2016-04-10</time>
+  	<time datetime="2016-04-09T16:47:17.476Z" itemprop="datePublished">2016-04-10</time>
 </a>
     </div>
   
@@ -247,16 +244,15 @@
 </blockquote>
 <p>对于开发者来说，单元测试（模块测试）是开发者编写的一小段代码，用于检验被测代码的一个很小的、很明确的功能是否正确。</p>
 <p>###AndroidStudio如何使用单元测试</p>
-<blockquote>
-<ol>
-<li><p>新建一个项目，自动会在包名下创建一个ApplicationTest.java</p>
-</li>
-<li><p>创建一个<strong>被测试</strong>的类，代码如下：</p>
-</li>
-</ol>
-</blockquote>
-<p>&gt;<br>            package com.zhou.dell.dtest0408_unittest;<br>            /**</p>
-<pre><code> * author：zh
+<ul>
+<li>新建一个项目，自动会在包名下创建一个ApplicationTest.java</li>
+</ul>
+<ul>
+<li>创建一个<strong>被测试</strong>的类，代码如下：</li>
+</ul>
+<pre><code>package com.zhou.dell.dtest0408_unittest;
+/**
+ * author：zh
  * version：v1.0
  * date: 2016/4/8
  * description:计算
@@ -266,12 +262,10 @@ public class Compute {
         return a + b ;
     }
 }
-</code></pre><blockquote>
-<ol>
+</code></pre><ul>
 <li>在ApplicationTest的同级目录下（当然你可以自己创建一个文件夹）创建一个类继承<strong>InstrumentationTestCase</strong>，注意不是Instrumentation，代码如下：</li>
-</ol>
-</blockquote>
-<p>&gt;<br>            package com.zhou.dell.dtest0408_unittest;<br>            import android.test.InstrumentationTestCase;<br>            /**</p>
+</ul>
+<p><pre><br>            package com.zhou.dell.dtest0408_unittest;<br>            import android.test.InstrumentationTestCase;<br>            /**</pre></p>
 <pre><code> * author：zh
  * version：v1.0
  * date: 2016/4/8
@@ -285,17 +279,17 @@ public class ExampleTest extends InstrumentationTestCase {
         assertEquals(expected, reality);
     }
 }
-</code></pre><blockquote>
-<ol>
+</code></pre><pre>    
+
+<ul>
 <li>点击Run-&gt;Edit Configurations-&gt;点击左上角的“+”-&gt;Android Tests，之后会出现如下窗口<br><img src="http://7xsstf.com2.z0.glb.clouddn.com/androidTest.bmp" alt="">然后输入Name,等其他配置点击apply<br><br><br>我的配置如下：<br><img src="http://7xsstf.com2.z0.glb.clouddn.com/ASTest2.bmp" alt=""></li>
-</ol>
-<ol>
+</ul>
+<ul>
 <li><p>点击 绿色的三角形 或者 shilft + F10（记得开虚拟机或者连接真机）</p>
 </li>
 <li><p>由于expected的值和reality的值相同，所以test通过，右下角就会有绿色的进度条，如下图：<br><img src="http://7xsstf.com2.z0.glb.clouddn.com/ASTest4.bmp" alt="">当然如果2个值不一样就会报错，会显示出红色的进度条，并且会有日志提示哪里出错，如图：<br><br><img src="http://7xsstf.com2.z0.glb.clouddn.com/ASTest5.bmp" alt=""></p>
 </li>
-</ol>
-</blockquote>
+</ul>
 <p>###注意</p>
 <ul>
 <li>这个测试类不一定要和ApplicationTest同级，可以自己新建一个文件夹</li>
@@ -303,7 +297,7 @@ public class ExampleTest extends InstrumentationTestCase {
 <li>测试类是继承InstrumentationTestCase</li>
 <li>单元测试可以测试一些很小很小的功能点，比如一些工具类中的方法，数据库的操作等等。</li>
 </ul>
-
+</pre>
       
     </div>
     
@@ -312,7 +306,7 @@ public class ExampleTest extends InstrumentationTestCase {
     
 <nav id="article-nav">
   
-    <a href="/2016/04/10/xx/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/04/10/AS单元测试test/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
@@ -321,11 +315,6 @@ public class ExampleTest extends InstrumentationTestCase {
       </div>
     </a>
   
-  
-    <a href="/2016/04/10/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
   
 </nav>
 
