@@ -202,7 +202,7 @@
   
     <div class="article-meta">
       <a href="/2016/04/10/xx/" class="article-date">
-  	<time datetime="2016-04-09T16:07:42.674Z" itemprop="datePublished">2016-04-10</time>
+  	<time datetime="2016-04-09T16:11:42.444Z" itemprop="datePublished">2016-04-10</time>
 </a>
     </div>
   
@@ -227,7 +227,40 @@
 }
 </code></pre></li>
 </ul>
+<p>一个table + 4个空格</p>
+<pre><code>package com.zhou.dell.dtest0408_unittest;
+/**
+ * author：zh
+ * version：v1.0
+ * date: 2016/4/8
+ * description:计算
+ */
+public class Compute {
+    public int add (int a , int b ) {
+        return a + b ;
+        }
+}
+</code></pre><p>2个table</p>
+<pre><code>package com.zhou.dell.dtest0408_unittest;
 
+import android.test.InstrumentationTestCase;
+
+/**
+ * author：zh
+ * version：v1.0
+ * date: 2016/4/8
+ * description:
+ */
+public class ExampleTest extends InstrumentationTestCase {
+
+    public void test() throws Exception {
+        Compute c = new Compute();
+        int expected =4;
+        int reality = c.add(1,3);
+        assertEquals(expected, reality);
+    }
+}
+</code></pre>
       
     </div>
     
@@ -257,7 +290,7 @@
   
     <div class="article-meta">
       <a href="/2016/04/10/hello-world/" class="article-date">
-  	<time datetime="2016-04-09T16:07:42.672Z" itemprop="datePublished">2016-04-10</time>
+  	<time datetime="2016-04-09T16:11:42.442Z" itemprop="datePublished">2016-04-10</time>
 </a>
     </div>
   
@@ -318,7 +351,7 @@
   
     <div class="article-meta">
       <a href="/2016/04/10/AS单元测试/" class="article-date">
-  	<time datetime="2016-04-09T16:07:42.665Z" itemprop="datePublished">2016-04-10</time>
+  	<time datetime="2016-04-09T16:11:42.436Z" itemprop="datePublished">2016-04-10</time>
 </a>
     </div>
   
