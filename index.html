@@ -198,11 +198,11 @@
 
       <div class="body-wrap">
   
-    <article id="post-Android中的Looper入门和使用" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-AS单元测试" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/04/12/Android中的Looper入门和使用/" class="article-date">
-  	<time datetime="2016-04-12T14:37:29.431Z" itemprop="datePublished">2016-04-12</time>
+      <a href="/2016/04/12/AS单元测试/" class="article-date">
+  	<time datetime="2016-04-12T14:51:51.266Z" itemprop="datePublished">2016-04-12</time>
 </a>
     </div>
   
@@ -211,10 +211,123 @@
       <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/12/AS单元测试/">AndroidStudio 进行单元测试</a>
+    </h1>
+  
+
+      </header>
+      
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>###Android中的Looper入门和使用</p>
-<p>###什么是Looper<br>    Looper用来把一个线程封装成Looper线程,因为新new出来的线程不是Looper线程.<br>    那么Looper线程有什么用呢,简单的讲,Looper线程可以接收其他线程发送的消息,并进行处理.<br>在打造Looper线程之前,先学习一下Looper的API,主要有一下几个方法</p>
+        <p>##AndroidStudio 进行单元测试</p>
+<blockquote>
+<p>单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证。对于单元测试中单元的含义，一般来说，要根据实际情况去判定其具体含义。</p>
+</blockquote>
+<p>对于开发者来说，单元测试（模块测试）是开发者编写的一小段代码，用于检验被测代码的一个很小的、很明确的功能是否正确。</p>
+<p>###AndroidStudio如何使用单元测试</p>
+<p>新建一个项目，自动会在包名下创建一个ApplicationTest.java</p>
+<p>创建一个<strong>被测试</strong>的类，代码如下：</p>
+<pre><code>package com.zhou.dell.dtest0408_unittest;
+/**
+ * author：zh
+ * version：v1.0
+ * date: 2016/4/8
+ * description:计算
+ */
+public class Compute {
+    public int add (int a , int b ) {
+        return a + b ;
+        }
+}
+</code></pre><p>在ApplicationTest的同级目录下（当然你可以自己创建一个文件夹）创建一个类继承<strong>InstrumentationTestCase</strong>，注意不是Instrumentation，代码如下：</p>
+<pre><code>package com.zhou.dell.dtest0408_unittest;        
+import android.test.InstrumentationTestCase;
+/**
+ * author：zh
+ * version：v1.0
+ * date: 2016/4/8
+ * description:
+ */
+public class ExampleTest extends InstrumentationTestCase {
+    public void test() throws Exception {
+        Compute c = new Compute();
+        int expected =4;
+        int reality = c.add(1,3);
+        assertEquals(expected, reality);
+    }
+}
+</code></pre><p>点击Run-&gt;Edit Configurations-&gt;点击左上角的“+”-&gt;Android Tests，之后会出现如下窗口<br><img src="http://7xsstf.com2.z0.glb.clouddn.com/androidTest.bmp" alt="">然后输入Name,等其他配置点击apply<br><br><br>我的配置如下：<br><img src="http://7xsstf.com2.z0.glb.clouddn.com/ASTest2.bmp" alt=""></p>
+<p>点击 绿色的三角形 或者 shilft + F10（记得开虚拟机或者连接真机）</p>
+<p>由于expected的值和reality的值相同，所以test通过，右下角就会有绿色的进度条，如下图：<br><img src="http://7xsstf.com2.z0.glb.clouddn.com/ASTest4.bmp" alt="">当然如果2个值不一样就会报错，会显示出红色的进度条，并且会有日志提示哪里出错，如图：<br><br><img src="http://7xsstf.com2.z0.glb.clouddn.com/ASTest5.bmp" alt=""></p>
+<p>###注意</p>
+<ul>
+<li>这个测试类不一定要和ApplicationTest同级，可以自己新建一个文件夹</li>
+<li>测试类中的方法必须是以test开头，不然系统不会识别</li>
+<li>测试类是继承InstrumentationTestCase</li>
+<li>单元测试可以测试一些很小很小的功能点，比如一些工具类中的方法，数据库的操作等等。</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android中的Looper入门和使用" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/12/Android中的Looper入门和使用/" class="article-date">
+  	<time datetime="2016-04-12T14:51:51.266Z" itemprop="datePublished">2016-04-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/12/Android中的Looper入门和使用/">AndroidStudio 进行单元测试</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#Android中的Looper入门和使用</p>
+<p>###什么是Looper</p>
+<pre><code>Looper用来把一个线程封装成Looper线程,因为新new出来的线程不是Looper线程.
+那么Looper线程有什么用呢,简单的讲,Looper线程可以接收其他线程发送的消息,并进行处理.
+</code></pre><p>在打造Looper线程之前,先学习一下Looper的API,主要有一下几个方法</p>
 <ul>
 <li><p>public static void prepare()    为当前线程提供一个Looper</p>
 </li>
@@ -231,11 +344,13 @@
 <li><p>public static void prepareMainLooper()    初始化与主线程相关联的looper</p>
 </li>
 </ul>
-<p>###Looper的工作原理<br>看图说话:<br><img src="http://7xsstf.com2.z0.glb.clouddn.com/looper%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%861.png" alt=""></p>
+<p>###Looper的工作原理</p>
+<p>看图说话:<br><img src="http://7xsstf.com2.z0.glb.clouddn.com/looper%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%861.png" alt=""></p>
 <p>这里简单的描述一下 Looper线程中维护了唯一一个Looper对象,Looper对象中有一个MessageQueue(消息队列),这个是一个存放Message的队列.当有消息来的时候就,在队尾add进去.而Message是Handler发送的,这个Message对象中有由哪个handler发送它的引用,假如 MS1是Handler1发送的那么MS1中的target就引用Handler1.</p>
 <p>当调用loop()方法之后,这个Loopper线程就真正的开始工作了,不断的从自己的MessageQueue中取出Message,然后处理</p>
 <p>从上图中,我们可以发现 Looper Thread中只有一个Looper,可以有多个Handler.</p>
-<p>###什么情况下使用 Looper 线程<br>如果我们需要新建一个线程，并且这个线程要能够循环处理其他线程发来的消息事件，或者需要长期与其他线程进行复杂的交互，这时就需要用到Looper来给线程建立消息队列。</p>
+<p>###什么情况下使用 Looper 线程</p>
+<p>如果我们需要新建一个线程，并且这个线程要能够循环处理其他线程发来的消息事件，或者需要长期与其他线程进行复杂的交互，这时就需要用到Looper来给线程建立消息队列。</p>
 <p>####如何打造一个 Looper 线程</p>
 <pre><code>public class LooperThread extends Thread {
     @Override
@@ -407,7 +522,7 @@ public class TestActivity extends Activity {
   
     <div class="article-meta">
       <a href="/2016/04/12/hello-world/" class="article-date">
-  	<time datetime="2016-04-12T14:37:29.431Z" itemprop="datePublished">2016-04-12</time>
+  	<time datetime="2016-04-12T14:51:51.266Z" itemprop="datePublished">2016-04-12</time>
 </a>
     </div>
   
@@ -438,104 +553,6 @@ public class TestActivity extends Activity {
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-AS单元测试" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/04/12/AS单元测试/" class="article-date">
-  	<time datetime="2016-04-12T14:37:29.399Z" itemprop="datePublished">2016-04-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/12/AS单元测试/">AndroidStudio 进行单元测试</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##AndroidStudio 进行单元测试</p>
-<blockquote>
-<p>单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证。对于单元测试中单元的含义，一般来说，要根据实际情况去判定其具体含义。</p>
-</blockquote>
-<p>对于开发者来说，单元测试（模块测试）是开发者编写的一小段代码，用于检验被测代码的一个很小的、很明确的功能是否正确。</p>
-<p>###AndroidStudio如何使用单元测试<br>新建一个项目，自动会在包名下创建一个ApplicationTest.java</p>
-<p>创建一个<strong>被测试</strong>的类，代码如下：</p>
-<pre><code>package com.zhou.dell.dtest0408_unittest;
-/**
- * author：zh
- * version：v1.0
- * date: 2016/4/8
- * description:计算
- */
-public class Compute {
-    public int add (int a , int b ) {
-        return a + b ;
-        }
-}
-</code></pre><p>在ApplicationTest的同级目录下（当然你可以自己创建一个文件夹）创建一个类继承<strong>InstrumentationTestCase</strong>，注意不是Instrumentation，代码如下：</p>
-<pre><code>package com.zhou.dell.dtest0408_unittest;        
-import android.test.InstrumentationTestCase;
-/**
- * author：zh
- * version：v1.0
- * date: 2016/4/8
- * description:
- */
-public class ExampleTest extends InstrumentationTestCase {
-    public void test() throws Exception {
-        Compute c = new Compute();
-        int expected =4;
-        int reality = c.add(1,3);
-        assertEquals(expected, reality);
-    }
-}
-</code></pre><p>点击Run-&gt;Edit Configurations-&gt;点击左上角的“+”-&gt;Android Tests，之后会出现如下窗口<br><img src="http://7xsstf.com2.z0.glb.clouddn.com/androidTest.bmp" alt="">然后输入Name,等其他配置点击apply<br><br><br>我的配置如下：<br><img src="http://7xsstf.com2.z0.glb.clouddn.com/ASTest2.bmp" alt=""></p>
-<p>点击 绿色的三角形 或者 shilft + F10（记得开虚拟机或者连接真机）</p>
-<p>由于expected的值和reality的值相同，所以test通过，右下角就会有绿色的进度条，如下图：<br><img src="http://7xsstf.com2.z0.glb.clouddn.com/ASTest4.bmp" alt="">当然如果2个值不一样就会报错，会显示出红色的进度条，并且会有日志提示哪里出错，如图：<br><br><img src="http://7xsstf.com2.z0.glb.clouddn.com/ASTest5.bmp" alt=""></p>
-<p>###注意</p>
-<ul>
-<li>这个测试类不一定要和ApplicationTest同级，可以自己新建一个文件夹</li>
-<li>测试类中的方法必须是以test开头，不然系统不会识别</li>
-<li>测试类是继承InstrumentationTestCase</li>
-<li>单元测试可以测试一些很小很小的功能点，比如一些工具类中的方法，数据库的操作等等。</li>
-</ul>
 
       
     </div>

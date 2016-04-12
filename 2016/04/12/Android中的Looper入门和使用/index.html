@@ -4,28 +4,37 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Hexo</title>
+  <title>AndroidStudio 进行单元测试 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="###Android中的Looper入门和使用
-###什么是Looper    Looper用来把一个线程封装成Looper线程,因为新new出来的线程不是Looper线程.    那么Looper线程有什么用呢,简单的讲,Looper线程可以接收其他线程发送的消息,并进行处理.在打造Looper线程之前,先学习一下Looper的API,主要有一下几个方法
+  <meta name="description" content="#Android中的Looper入门和使用
+###什么是Looper
+Looper用来把一个线程封装成Looper线程,因为新new出来的线程不是Looper线程.
+那么Looper线程有什么用呢,简单的讲,Looper线程可以接收其他线程发送的消息,并进行处理.
+在打造Looper线程之前,先学习一下Looper的API,主要有一下几个方法
 
-public static void">
+public static void prepare">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="AndroidStudio 进行单元测试">
 <meta property="og:url" content="http://yoursite.com/2016/04/12/Android中的Looper入门和使用/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="###Android中的Looper入门和使用
-###什么是Looper    Looper用来把一个线程封装成Looper线程,因为新new出来的线程不是Looper线程.    那么Looper线程有什么用呢,简单的讲,Looper线程可以接收其他线程发送的消息,并进行处理.在打造Looper线程之前,先学习一下Looper的API,主要有一下几个方法
+<meta property="og:description" content="#Android中的Looper入门和使用
+###什么是Looper
+Looper用来把一个线程封装成Looper线程,因为新new出来的线程不是Looper线程.
+那么Looper线程有什么用呢,简单的讲,Looper线程可以接收其他线程发送的消息,并进行处理.
+在打造Looper线程之前,先学习一下Looper的API,主要有一下几个方法
 
-public static void">
+public static void prepare">
 <meta property="og:image" content="http://7xsstf.com2.z0.glb.clouddn.com/looper%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%861.png">
-<meta property="og:updated_time" content="2016-04-12T14:30:12.000Z">
+<meta property="og:updated_time" content="2016-04-12T14:49:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="###Android中的Looper入门和使用
-###什么是Looper    Looper用来把一个线程封装成Looper线程,因为新new出来的线程不是Looper线程.    那么Looper线程有什么用呢,简单的讲,Looper线程可以接收其他线程发送的消息,并进行处理.在打造Looper线程之前,先学习一下Looper的API,主要有一下几个方法
+<meta name="twitter:title" content="AndroidStudio 进行单元测试">
+<meta name="twitter:description" content="#Android中的Looper入门和使用
+###什么是Looper
+Looper用来把一个线程封装成Looper线程,因为新new出来的线程不是Looper线程.
+那么Looper线程有什么用呢,简单的讲,Looper线程可以接收其他线程发送的消息,并进行处理.
+在打造Looper线程之前,先学习一下Looper的API,主要有一下几个方法
 
-public static void">
+public static void prepare">
 <meta name="twitter:image" content="http://7xsstf.com2.z0.glb.clouddn.com/looper%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%861.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -212,7 +221,7 @@ public static void">
   
     <div class="article-meta">
       <a href="/2016/04/12/Android中的Looper入门和使用/" class="article-date">
-  	<time datetime="2016-04-12T14:37:29.431Z" itemprop="datePublished">2016-04-12</time>
+  	<time datetime="2016-04-12T14:51:51.266Z" itemprop="datePublished">2016-04-12</time>
 </a>
     </div>
   
@@ -221,10 +230,31 @@ public static void">
       <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      AndroidStudio 进行单元测试
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>###Android中的Looper入门和使用</p>
-<p>###什么是Looper<br>    Looper用来把一个线程封装成Looper线程,因为新new出来的线程不是Looper线程.<br>    那么Looper线程有什么用呢,简单的讲,Looper线程可以接收其他线程发送的消息,并进行处理.<br>在打造Looper线程之前,先学习一下Looper的API,主要有一下几个方法</p>
+        <p>#Android中的Looper入门和使用</p>
+<p>###什么是Looper</p>
+<pre><code>Looper用来把一个线程封装成Looper线程,因为新new出来的线程不是Looper线程.
+那么Looper线程有什么用呢,简单的讲,Looper线程可以接收其他线程发送的消息,并进行处理.
+</code></pre><p>在打造Looper线程之前,先学习一下Looper的API,主要有一下几个方法</p>
 <ul>
 <li><p>public static void prepare()    为当前线程提供一个Looper</p>
 </li>
@@ -241,11 +271,13 @@ public static void">
 <li><p>public static void prepareMainLooper()    初始化与主线程相关联的looper</p>
 </li>
 </ul>
-<p>###Looper的工作原理<br>看图说话:<br><img src="http://7xsstf.com2.z0.glb.clouddn.com/looper%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%861.png" alt=""></p>
+<p>###Looper的工作原理</p>
+<p>看图说话:<br><img src="http://7xsstf.com2.z0.glb.clouddn.com/looper%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%861.png" alt=""></p>
 <p>这里简单的描述一下 Looper线程中维护了唯一一个Looper对象,Looper对象中有一个MessageQueue(消息队列),这个是一个存放Message的队列.当有消息来的时候就,在队尾add进去.而Message是Handler发送的,这个Message对象中有由哪个handler发送它的引用,假如 MS1是Handler1发送的那么MS1中的target就引用Handler1.</p>
 <p>当调用loop()方法之后,这个Loopper线程就真正的开始工作了,不断的从自己的MessageQueue中取出Message,然后处理</p>
 <p>从上图中,我们可以发现 Looper Thread中只有一个Looper,可以有多个Handler.</p>
-<p>###什么情况下使用 Looper 线程<br>如果我们需要新建一个线程，并且这个线程要能够循环处理其他线程发来的消息事件，或者需要长期与其他线程进行复杂的交互，这时就需要用到Looper来给线程建立消息队列。</p>
+<p>###什么情况下使用 Looper 线程</p>
+<p>如果我们需要新建一个线程，并且这个线程要能够循环处理其他线程发来的消息事件，或者需要长期与其他线程进行复杂的交互，这时就需要用到Looper来给线程建立消息队列。</p>
 <p>####如何打造一个 Looper 线程</p>
 <pre><code>public class LooperThread extends Thread {
     @Override
@@ -396,6 +428,15 @@ public class TestActivity extends Activity {
     
 <nav id="article-nav">
   
+    <a href="/2016/04/12/AS单元测试/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          AndroidStudio 进行单元测试
+        
+      </div>
+    </a>
+  
   
     <a href="/2016/04/12/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Hello World</div>
@@ -433,7 +474,7 @@ public class TestActivity extends Activity {
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Android中的Looper入门和使用" data-title="" data-url="http://yoursite.com/2016/04/12/Android中的Looper入门和使用/"></div>
+	<div class="ds-thread" data-thread-key="Android中的Looper入门和使用" data-title="AndroidStudio 进行单元测试" data-url="http://yoursite.com/2016/04/12/Android中的Looper入门和使用/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
