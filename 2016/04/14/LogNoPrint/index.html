@@ -3,17 +3,26 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Category: other | zhouhaolong1</title>
+  <title>Log不打印 | zhouhaolong1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Nothing is too difficult if you put your heart input it!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zhouhaolong1">
-<meta property="og:url" content="http://yoursite.com/categories/other/index.html">
+  <meta name="description" content="今天使用OkHttp访问网络,获取数据后,尝试打印获取到的数据,发现死活没有输出,断点调试的确是获取到了数据,然后尝试把对象打印出来,对象能打印,有点奇怪,但是对象中的数据打印不出来.后来发现是数据的问题,获取到的数据 response.body().string() 其实的值是:
+
+发现返回值的前面有个”\r\n”,难道是Log无法打印,后来试验真的是Log无法打印含有”\r\n”这样转义字符的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Log不打印">
+<meta property="og:url" content="http://yoursite.com/2016/04/14/LogNoPrint/index.html">
 <meta property="og:site_name" content="zhouhaolong1">
-<meta property="og:description" content="Nothing is too difficult if you put your heart input it!">
+<meta property="og:description" content="今天使用OkHttp访问网络,获取数据后,尝试打印获取到的数据,发现死活没有输出,断点调试的确是获取到了数据,然后尝试把对象打印出来,对象能打印,有点奇怪,但是对象中的数据打印不出来.后来发现是数据的问题,获取到的数据 response.body().string() 其实的值是:
+
+发现返回值的前面有个”\r\n”,难道是Log无法打印,后来试验真的是Log无法打印含有”\r\n”这样转义字符的">
+<meta property="og:image" content="http://7xsstf.com2.z0.glb.clouddn.com/Logcat%E6%97%A0%E8%BE%93%E5%87%BA.bmp">
+<meta property="og:updated_time" content="2016-04-16T14:52:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zhouhaolong1">
-<meta name="twitter:description" content="Nothing is too difficult if you put your heart input it!">
+<meta name="twitter:title" content="Log不打印">
+<meta name="twitter:description" content="今天使用OkHttp访问网络,获取数据后,尝试打印获取到的数据,发现死活没有输出,断点调试的确是获取到了数据,然后尝试把对象打印出来,对象能打印,有点奇怪,但是对象中的数据打印不出来.后来发现是数据的问题,获取到的数据 response.body().string() 其实的值是:
+
+发现返回值的前面有个”\r\n”,难道是Log无法打印,后来试验真的是Log无法打印含有”\r\n”这样转义字符的">
+<meta name="twitter:image" content="http://7xsstf.com2.z0.glb.clouddn.com/Logcat%E6%97%A0%E8%BE%93%E5%87%BA.bmp">
   
     <link rel="alternative" href="/atom.xml" title="zhouhaolong1" type="application/atom+xml">
   
@@ -41,10 +50,10 @@
           fancybox: true,
           animate: false,
           isHome: false,
-          isPost: false,
+          isPost: true,
           isArchive: false,
           isTag: false,
-          isCategory: true,
+          isCategory: false,
           open_in_new: false,
           fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
           scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.0.9/scrollreveal.min.js"
@@ -141,10 +150,6 @@
                         
                             <li><a href="/archives/">所有文章</a></li>
                         
-                            <li><a href="/android/base">android</a></li>
-                        
-                            <li><a href="/java">java</a></li>
-                        
                             <li><a href="/tags/">标签云</a></li>
                         
                             <li><a href="/about/">关于我</a></li>
@@ -158,7 +163,7 @@
                             
                                 <li id="GitHub"><a class="GitHub" target="_blank" href="#" title="GitHub"></a></li>
                             
-                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                                <li id="知乎"><a class="知乎" target="_blank" href="https://www.zhihu.com/people/zhouhaolong1" title="知乎"></a></li>
                             
                         </ul>
                     </nav>
@@ -167,7 +172,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidStudio/">AndroidStudio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Looper/">Looper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UnitTest/">UnitTest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单元测试/">单元测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮询线程/">轮询线程</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidStudio/">AndroidStudio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Looper/">Looper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyQuestion/">MyQuestion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UnitTest/">UnitTest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单元测试/">单元测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮询线程/">轮询线程</a></li></ul>
                     </div>
                 </section>
                 
@@ -222,10 +227,6 @@
                 
                     <li><a href="/archives/">所有文章</a></li>
                 
-                    <li><a href="/android/base">android</a></li>
-                
-                    <li><a href="/java">java</a></li>
-                
                     <li><a href="/tags/">标签云</a></li>
                 
                     <li><a href="/about/">关于我</a></li>
@@ -240,65 +241,196 @@
                             
                                 <li id="GitHub"><a class="GitHub" target="_blank" href="#" title="GitHub"></a></li>
                             
-                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                                <li id="知乎"><a class="知乎" target="_blank" href="https://www.zhihu.com/people/zhouhaolong1" title="知乎"></a></li>
                             
                         </ul>
             </nav>
         </header>                
     </div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-LogNoPrint" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/04/06/as-studio-unit-test/" class="archive-article-date">
-      <time datetime="2016-04-06T13:30:16.000Z" itemprop="datePublished">04-06</time>
+    <div class="article-meta">
+      <a href="/2016/04/14/LogNoPrint/" class="article-date">
+      <time datetime="2016-04-14T13:50:15.000Z" itemprop="datePublished">2016-04-14</time>
 </a>
-        </div>
-         
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/06/as-studio-unit-test/">AndroidStudio 进行单元测试</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Log不打印
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/other/">other</a>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
     </div>
 
 
-          
+        
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AndroidStudio/">AndroidStudio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UnitTest/">UnitTest</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单元测试/">单元测试</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyQuestion/">MyQuestion</a></li></ul>
     </div>
 
-        </div>
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>今天使用OkHttp访问网络,获取数据后,尝试打印获取到的数据,发现死活没有输出,断点调试的确是获取到了数据,然后尝试把对象打印出来,对象能打印,有点奇怪,但是对象中的数据打印不出来.后来发现是数据的问题,获取到的数据 response.body().string() 其实的值是:</p>
+<p><img src="http://7xsstf.com2.z0.glb.clouddn.com/Logcat%E6%97%A0%E8%BE%93%E5%87%BA.bmp" alt=""></p>
+<p>发现返回值的前面有个”\r\n”,难道是Log无法打印,后来试验真的是Log无法打印含有”\r\n”这样转义字符的字符串.</p>
+<p>代码如下:</p>
+<pre><code>private void getDataFromNet() {
+    //  创建一个okHttpClient对象
+    OkHttpClient okHttpClient = new OkHttpClient();
+    //  创建一个请求对象
+    Request request = new Request.Builder().url(&quot;http://japi.juhe.cn/funny/type.from?key=9efc31c185f5a8959e0e25771b3db102&quot;).build();
+    //  把请求封装成任务
+    Call call = okHttpClient.newCall(request);
+    //  把任务
+    call.enqueue(new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            Log.d(TAG, call.toString());
+        }
+        @Override
+        public void onResponse(Call call, final Response response) throws IOException {
+            Log.d(TAG, response.toString());
+            String string = response.body().string();
+            Log.d(TAG, string);
+        }
+    });
+}
+</code></pre><p>###那么如何查看返回数据呢</p>
+<p>可以通过System.out.println(response.body().string());输出,但是这种方式不方便管理日志.不过呢,一般的返回的数据前面不会有”\r\n”.</p>
+
+      
+    </div>
+    
   </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/04/14/LogNoPrint/">Log不打印</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">zhouhaolong</a></p>
+        <p><span>发布时间:</span>2016-04-14, 21:50:15</p>
+        <p><span>最后更新:</span>2016-04-16, 22:52:51</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/04/14/LogNoPrint/" title="Log不打印">http://yoursite.com/2016/04/14/LogNoPrint/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2016/04/14/LogNoPrint/　　作者: zhouhaolong" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/04/09/android-looper/">
+                    Android中的Looper的使用
+                </a>
+            </div>
+        
+    </nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <li id="bds_twi"><a href="#" class="bds_twi" data-cmd="twi" title="分享到推特"></a></li>
+            <li id="bds_tsina"><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a></li>
+            <li id="bds_sqq"><a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a></li>
+            <li id="bds_copy"><a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a></li>
+            <li id="bds_mail"><a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a></li>
+            <li id="bds_weixin"><a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a></li>
+            <li id="bds_more"><a href="#" class="bds_more" data-cmd="more"></i></a></li>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Log不打印　| zhouhaolong1　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/04/14/LogNoPrint/" data-title="Log不打印" data-url="http://yoursite.com/2016/04/14/LogNoPrint/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhouhaolong1"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
 
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/04/09/android-looper/" title="下一篇: Android中的Looper的使用">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/LogNoPrint/">Log不打印</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/09/android-looper/">Android中的Looper的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/06/as-studio-unit-test/">AndroidStudio 进行单元测试</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
