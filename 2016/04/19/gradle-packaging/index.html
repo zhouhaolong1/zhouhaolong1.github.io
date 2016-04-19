@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  
+  <title>AndroidStudio Gradle多渠道打包 | zhouhaolong1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文以友盟进行多渠道打包为例
+
+什么是渠道包渠道包为各个应用市场打的包,在清单文件中,通过meta-data标签,进行标识,如:
+123&amp;lt;meta-data	android:name=&quot;UMENG_CHANNEL&quot;	android:value=&quot;$&amp;#123;UMENG_CHANNEL_VALUE&amp;#125;&quot; /&amp;gt;
+渠道包的作用主要是用来做统计的,统计各个平台app的下载和使用情况">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AndroidStudio Gradle多渠道打包">
+<meta property="og:url" content="http://yoursite.com/2016/04/19/gradle-packaging/index.html">
+<meta property="og:site_name" content="zhouhaolong1">
+<meta property="og:description" content="本文以友盟进行多渠道打包为例
+
+什么是渠道包渠道包为各个应用市场打的包,在清单文件中,通过meta-data标签,进行标识,如:
+123&amp;lt;meta-data	android:name=&quot;UMENG_CHANNEL&quot;	android:value=&quot;$&amp;#123;UMENG_CHANNEL_VALUE&amp;#125;&quot; /&amp;gt;
+渠道包的作用主要是用来做统计的,统计各个平台app的下载和使用情况">
+<meta property="og:image" content="http://7xsstf.com2.z0.glb.clouddn.com/packaging_result.png">
+<meta property="og:image" content="http://7xsstf.com2.z0.glb.clouddn.com/gradle-wrapper.PNG">
+<meta property="og:updated_time" content="2016-04-19T14:55:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AndroidStudio Gradle多渠道打包">
+<meta name="twitter:description" content="本文以友盟进行多渠道打包为例
+
+什么是渠道包渠道包为各个应用市场打的包,在清单文件中,通过meta-data标签,进行标识,如:
+123&amp;lt;meta-data	android:name=&quot;UMENG_CHANNEL&quot;	android:value=&quot;$&amp;#123;UMENG_CHANNEL_VALUE&amp;#125;&quot; /&amp;gt;
+渠道包的作用主要是用来做统计的,统计各个平台app的下载和使用情况">
+<meta name="twitter:image" content="http://7xsstf.com2.z0.glb.clouddn.com/packaging_result.png">
+  
+    <link rel="alternative" href="/atom.xml" title="zhouhaolong1" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/monkey_favicon.ico">
+  
+  
+  
+  
+      <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+      <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.9/clipboard.min.js"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: false,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+          fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+          scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.0.9/scrollreveal.min.js"
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+  
+      <script>
+          var _hmt = _hmt || [];
+          (function() {
+              var hm = document.createElement("script");
+              hm.src = "//hm.baidu.com/hm.js?f90275f3ac557a8bfe28579c500c5d3d";
+              var s = document.getElementsByTagName("script")[0]; 
+              s.parentNode.insertBefore(hm, s);
+          })();
+      </script>
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="http://7xsstf.com2.z0.glb.clouddn.com/monkey.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">zhouhaolong1</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Monkey</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:zhouhaolong1@163.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="#" title="GitHub"></a></li>
+                            
+                                <li id="知乎"><a class="知乎" target="_blank" href="https://www.zhihu.com/people/zhouhaolong1" title="知乎"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidStudio/">AndroidStudio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Looper/">Looper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UnitTest/">UnitTest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vysor/">Vysor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单元测试/">单元测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/电脑控制手机/">电脑控制手机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮询线程/">轮询线程</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">我用双手成就你的梦想</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">zhouhaolong1</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="http://7xsstf.com2.z0.glb.clouddn.com/monkey.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">zhouhaolong1</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Monkey</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:zhouhaolong1@163.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="#" title="GitHub"></a></li>
+                            
+                                <li id="知乎"><a class="知乎" target="_blank" href="https://www.zhihu.com/people/zhouhaolong1" title="知乎"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-gradle-packaging" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/19/gradle-packaging/" class="article-date">
+      <time datetime="2016-04-19T11:35:33.000Z" itemprop="datePublished">2016-04-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      AndroidStudio Gradle多渠道打包
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/AndroidStudio/">AndroidStudio</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AndroidStudio/">AndroidStudio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <blockquote>
+<p>本文以友盟进行多渠道打包为例</p>
+</blockquote>
+<h3 id="什么是渠道包"><a href="#什么是渠道包" class="headerlink" title="什么是渠道包"></a>什么是渠道包</h3><p>渠道包为各个应用市场打的包,在清单文件中,通过meta-data标签,进行标识,如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta-data</span><br><span class="line">	android:name=<span class="string">"UMENG_CHANNEL"</span></span><br><span class="line">	android:value=<span class="string">"$&#123;UMENG_CHANNEL_VALUE&#125;"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="渠道包的作用"><a href="#渠道包的作用" class="headerlink" title="渠道包的作用"></a>渠道包的作用</h3><p>主要是用来做统计的,统计各个平台app的下载和使用情况.如果你不需要统计,完全不用打渠道包.</p>
+<h3 id="Gradle如何打渠道包"><a href="#Gradle如何打渠道包" class="headerlink" title="Gradle如何打渠道包"></a>Gradle如何打渠道包</h3><ul>
+<li>首先在AndroidManifest.xml里配置渠道</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta-data</span><br><span class="line">   android:name=<span class="string">"UMENG_CHANNEL"</span></span><br><span class="line">   android:value=<span class="string">"$&#123;UMENG_CHANNEL_VALUE&#125;"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在可运行的module中的build.gradle设置productFlavors,这个productFlavors是渠道列表</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">productFlavors &#123;</span><br><span class="line">       website &#123;</span><br><span class="line">           manifestPlaceholders = [UMENG_CHANNEL_VALUE: <span class="string">"website"</span>,UNIONID_VALUE: <span class="string">"1110"</span>]</span><br><span class="line">       &#125;</span><br><span class="line">       cpd_xiaomi &#123;</span><br><span class="line">           manifestPlaceholders = [UMENG_CHANNEL_VALUE: <span class="string">"cpd_xiaomi"</span>,UNIONID_VALUE: <span class="string">"1111"</span>]</span><br><span class="line">       &#125;</span><br><span class="line">       cpd_360 &#123;</span><br><span class="line">           manifestPlaceholders = [UMENG_CHANNEL_VALUE: <span class="string">"cpd_360"</span>,UNIONID_VALUE: <span class="string">"1112"</span>]</span><br><span class="line">       &#125;</span><br><span class="line">       cpd_lenovo &#123;</span><br><span class="line">           manifestPlaceholders = [UMENG_CHANNEL_VALUE: <span class="string">"cpd_lenovo"</span>,UNIONID_VALUE: <span class="string">"1113"</span>]</span><br><span class="line">       &#125;</span><br><span class="line">       website&#123;&#125;</span><br><span class="line">       pt_91zhushou&#123;&#125;</span><br><span class="line">       pt_anzhuoshichang&#123;&#125;</span><br><span class="line">       productFlavors.all &#123;</span><br><span class="line">           flavor-&gt;flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在Terminal中执行gradlew clean</li>
+<li>再在Terminal中执行gradlew assembleRelease 就ok了.</li>
+</ul>
+<p><img src="http://7xsstf.com2.z0.glb.clouddn.com/packaging_result.png" alt=""></p>
+<p>Android运用Gradle build后生成的app-debug-unaligned.apk是生成release包的中间产物.</p>
+<h3 id="为什么要使用gradlew命令而不是gradle命令"><a href="#为什么要使用gradlew命令而不是gradle命令" class="headerlink" title="为什么要使用gradlew命令而不是gradle命令"></a>为什么要使用gradlew命令而不是gradle命令</h3><p>在工程目录下有一个gradle文件夹，在gradle/wrapper目录下有一个gradle-wrapper.properties文件，打开它：<br>如图:</p>
+<p><img src="http://7xsstf.com2.z0.glb.clouddn.com/gradle-wrapper.PNG" alt=""></p>
+<p>上图代表着这个工程所依赖的gradle的版本信息。上图的细线方框表示，如果我们的工程中没有gradle，软件会根据这个url去下载gradle，终于知道为啥第一次打开AS时会这么慢了吧？</p>
+<p>如果我们执行了gradlew命令，实际上是执行上面的gradle wrapper，然后找到我们已经下载好的gradle 2.2.1。如果现在有很多个工程，但是每个工程的gradle版本都不一样，我就必须要将每个版本的gradle都要配置到环境变量当中，而执行了gradlew命令，就会避免这个麻烦。</p>
+<h3 id="gradle的常用命令"><a href="#gradle的常用命令" class="headerlink" title="gradle的常用命令"></a>gradle的常用命令</h3><ol>
+<li><p>gradlew clean 删除 项目/app/build文件夹</p>
+</li>
+<li><p>gradlew build 检查依赖并编译打包这里注意的是 ./gradlew build 命令把debug、release环境的包都打出来，生成的包在目录 项目app/build/outputs/apk/下</p>
+</li>
+<li><p>gradlew assembleDebug 编译并打Debug包</p>
+</li>
+<li><p>gradlew assemblexiaomiDebug 编译并打xiaomi的debug包，其他类似(但是一般没有什么用)</p>
+</li>
+<li><p><strong>gradlew assembleRelease 编译并打Release的包</strong> (比较常用)</p>
+</li>
+<li><p>gradlew assemblexiaomiRelease 编译并打xiaomi的Release包，其他类似</p>
+</li>
+<li><p>gradlew installRelease Release模式打包并安装</p>
+</li>
+<li><p>gradlew uninstallRelease 卸载Release模式包</p>
+</li>
+</ol>
+<h3 id="我的完整的gradle配置"><a href="#我的完整的gradle配置" class="headerlink" title="我的完整的gradle配置"></a>我的完整的gradle配置</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: <span class="string">'com.android.application'</span></span><br><span class="line"><span class="comment">//获取当前时间</span></span><br><span class="line"><span class="function">def <span class="title">buildTime</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    def date = <span class="keyword">new</span> Date()</span><br><span class="line">    def formattedDate = date.format(<span class="string">'yyyyMMdd'</span>)</span><br><span class="line">    <span class="keyword">return</span> formattedDate</span><br><span class="line">&#125;</span><br><span class="line">android &#123;</span><br><span class="line"></span><br><span class="line">    dexOptions &#123;</span><br><span class="line">        javaMaxHeapSize <span class="string">"4g"</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    signingConfigs &#123;</span><br><span class="line">        debug &#123;</span><br><span class="line">            <span class="comment">// No debug config</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        release &#123;</span><br><span class="line">            <span class="function">storeFile <span class="title">file</span><span class="params">(<span class="string">'../your key'</span>)</span></span><br><span class="line">            storePassword "your password"</span><br><span class="line">            keyAlias "your alias"</span><br><span class="line">            keyPassword "your password"</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    compileSdkVersion 22</span><br><span class="line">    buildToolsVersion '23.0.2'</span><br><span class="line"></span><br><span class="line">    defaultConfig </span>&#123;</span><br><span class="line">        applicationId <span class="string">"your application package name"</span></span><br><span class="line">        minSdkVersion <span class="number">8</span></span><br><span class="line">        targetSdkVersion <span class="number">23</span></span><br><span class="line">        versionCode <span class="number">1</span></span><br><span class="line">        versionName <span class="string">"1.0"</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// dex突破65535的限制</span></span><br><span class="line">        multiDexEnabled <span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 默认渠道</span></span><br><span class="line">        manifestPlaceholders = [UMENG_CHANNEL_VALUE: <span class="string">"web"</span>]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//忽略lint异常</span></span><br><span class="line">    lintOptions &#123;</span><br><span class="line">        abortOnError <span class="keyword">false</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        debug &#123; <span class="comment">// 显示Log</span></span><br><span class="line"><span class="comment">//            buildConfigField "boolean", "LOG_DEBUG", "true"</span></span><br><span class="line"><span class="comment">//            versionNameSuffix "-debug"</span></span><br><span class="line"><span class="comment">//            minifyEnabled false</span></span><br><span class="line"><span class="comment">//            zipAlignEnabled false</span></span><br><span class="line"><span class="comment">//            shrinkResources false</span></span><br><span class="line"><span class="comment">//            signingConfig signingConfigs.debug</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        release &#123;</span><br><span class="line">            <span class="comment">//是否进行混淆</span></span><br><span class="line">            minifyEnabled <span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">            zipAlignEnabled <span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 移除无用的resource文件</span></span><br><span class="line">            shrinkResources <span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//启用签名配置</span></span><br><span class="line">            signingConfig signingConfigs.release</span><br><span class="line"></span><br><span class="line">            <span class="comment">//混淆文件的位置</span></span><br><span class="line">            <span class="function">proguardFiles <span class="title">getDefaultProguardFile</span><span class="params">(<span class="string">'proguard-android.txt'</span>)</span>, 'proguard-project.txt'</span><br><span class="line">			</span><br><span class="line">			<span class="comment">// 修改打包之后的名字</span></span><br><span class="line">            applicationVariants.all </span>&#123; variant -&gt;</span><br><span class="line">                variant.outputs.each &#123; output -&gt;</span><br><span class="line">                    <span class="keyword">if</span> (output.outputFile != <span class="keyword">null</span> &amp;&amp; output.outputFile.name.endsWith(<span class="string">'.apk'</span>)</span><br><span class="line">                            &amp;&amp;<span class="string">'release'</span>.equals(variant.buildType.name)) &#123;</span><br><span class="line">                        def apkFile = <span class="keyword">new</span> File(</span><br><span class="line">                                output.outputFile.getParent(),</span><br><span class="line">                                <span class="string">"SafePeriodphone_$&#123;variant.flavorName&#125;_v$&#123;variant.versionName&#125;_$&#123;buildTime()&#125;_release.apk"</span>)</span><br><span class="line">                        output.outputFile = apkFile</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//渠道列表</span></span><br><span class="line">    productFlavors &#123;</span><br><span class="line">        pt_91zhushou &#123;&#125;</span><br><span class="line">        pt_anzhuoshichang &#123;&#125;</span><br><span class="line">        pt_anzhi &#123;&#125;</span><br><span class="line">        pt_tencent &#123;&#125;</span><br><span class="line">        pt_mumayi &#123;&#125;</span><br><span class="line">        pt_wandoujia &#123;&#125;</span><br><span class="line">        pt_360shouji &#123;&#125;</span><br><span class="line">        pt_baidu &#123;&#125;</span><br><span class="line">        pt_xiaomi &#123;&#125;</span><br><span class="line">        pt_meizu &#123;&#125;</span><br><span class="line">        pt_huawei &#123;&#125;</span><br><span class="line">        pt_web &#123;&#125;</span><br><span class="line">        pt_zonghe &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//指定渠道名</span></span><br><span class="line">    productFlavors.all &#123;</span><br><span class="line">        flavor -&gt; flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    <span class="function">compile <span class="title">project</span><span class="params">(<span class="string">':xxlib'</span>)</span></span><br><span class="line">    compile <span class="title">files</span><span class="params">(<span class="string">'libs/nineoldandroids-2.4.0.jar'</span>)</span></span><br><span class="line">    compile <span class="title">files</span><span class="params">(<span class="string">'libs/picasso-2.3.1.jar'</span>)</span></span><br><span class="line">    compile <span class="title">files</span><span class="params">(<span class="string">'libs/viewpagertransformslibrary.jar'</span>)</span></span><br><span class="line">&#125;</span><br><span class="line"></span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考文献 <a href="http://www.cnblogs.com/smyhvae/p/4456420.html" target="_blank" rel="external">http://www.cnblogs.com/smyhvae/p/4456420.html</a></p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/04/19/vysor/">
+                    Vysor:在电脑里控制你的安卓手机
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是渠道包"><span class="toc-number">1.</span> <span class="toc-text">什么是渠道包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#渠道包的作用"><span class="toc-number">2.</span> <span class="toc-text">渠道包的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gradle如何打渠道包"><span class="toc-number">3.</span> <span class="toc-text">Gradle如何打渠道包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么要使用gradlew命令而不是gradle命令"><span class="toc-number">4.</span> <span class="toc-text">为什么要使用gradlew命令而不是gradle命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gradle的常用命令"><span class="toc-number">5.</span> <span class="toc-text">gradle的常用命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的完整的gradle配置"><span class="toc-number">6.</span> <span class="toc-text">我的完整的gradle配置</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <li id="bds_twi"><a href="#" class="bds_twi" data-cmd="twi" title="分享到推特"></a></li>
+            <li id="bds_tsina"><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a></li>
+            <li id="bds_sqq"><a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a></li>
+            <li id="bds_copy"><a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a></li>
+            <li id="bds_mail"><a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a></li>
+            <li id="bds_weixin"><a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a></li>
+            <li id="bds_more"><a href="#" class="bds_more" data-cmd="more"></i></a></li>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"AndroidStudio Gradle多渠道打包　| zhouhaolong1　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/04/19/gradle-packaging/" data-title="AndroidStudio Gradle多渠道打包" data-url="http://yoursite.com/2016/04/19/gradle-packaging/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhouhaolong1"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/04/19/vysor/" title="下一篇: Vysor:在电脑里控制你的安卓手机">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/04/19/gradle-packaging/">AndroidStudio Gradle多渠道打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/19/vysor/">Vysor:在电脑里控制你的安卓手机</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/18/as-shortcut-key/">AndroidStudio 快捷键</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/LogNoPrint/">Log不打印</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/09/android-looper/">Android中的Looper的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/06/as-studio-unit-test/">AndroidStudio 进行单元测试</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 zhouhaolong1
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 9;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

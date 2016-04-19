@@ -3,26 +3,64 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Log不打印 | zhouhaolong1</title>
+  <title>Vysor:在电脑里控制你的安卓手机 | zhouhaolong1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天使用OkHttp访问网络,获取数据后,尝试打印获取到的数据,发现死活没有输出,断点调试的确是获取到了数据,然后尝试把对象打印出来,对象能打印,有点奇怪,但是对象中的数据打印不出来.后来发现是数据的问题,获取到的数据 response.body().string() 其实的值是:
+  <meta name="description" content="什么是VysorVysor是Chrome的一个插件,它可以实现用电脑显示和控制手机,并且延迟很小很小,不会像360,豌豆荚那么大.
+如何使用
+安装Chrome
+ 1.1 下载Chrome
+ 1.2 安装就不多说了.
 
-发现返回值的前面有个”\r\n”,难道是Log无法打印,后来试验真的是Log无法打印含有”\r\n”这样转义字符的">
+安装Vysor插件
+ 2.1 点击拓展程序 
+ 2.2 点击 获取更多扩展程序
+ 
+ 2.3 在 搜索框中 搜索 Vysor
+ 2.4 点击安装 即可
+
+安装VysorAPP
+ 3.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Log不打印">
-<meta property="og:url" content="http://yoursite.com/2016/04/14/LogNoPrint/index.html">
+<meta property="og:title" content="Vysor:在电脑里控制你的安卓手机">
+<meta property="og:url" content="http://yoursite.com/2016/04/19/vysor/index.html">
 <meta property="og:site_name" content="zhouhaolong1">
-<meta property="og:description" content="今天使用OkHttp访问网络,获取数据后,尝试打印获取到的数据,发现死活没有输出,断点调试的确是获取到了数据,然后尝试把对象打印出来,对象能打印,有点奇怪,但是对象中的数据打印不出来.后来发现是数据的问题,获取到的数据 response.body().string() 其实的值是:
+<meta property="og:description" content="什么是VysorVysor是Chrome的一个插件,它可以实现用电脑显示和控制手机,并且延迟很小很小,不会像360,豌豆荚那么大.
+如何使用
+安装Chrome
+ 1.1 下载Chrome
+ 1.2 安装就不多说了.
 
-发现返回值的前面有个”\r\n”,难道是Log无法打印,后来试验真的是Log无法打印含有”\r\n”这样转义字符的">
-<meta property="og:image" content="http://7xsstf.com2.z0.glb.clouddn.com/Logcat%E6%97%A0%E8%BE%93%E5%87%BA.bmp">
-<meta property="og:updated_time" content="2016-04-19T14:57:52.000Z">
+安装Vysor插件
+ 2.1 点击拓展程序 
+ 2.2 点击 获取更多扩展程序
+ 
+ 2.3 在 搜索框中 搜索 Vysor
+ 2.4 点击安装 即可
+
+安装VysorAPP
+ 3.">
+<meta property="og:image" content="http://7xsstf.com2.z0.glb.clouddn.com/chrome-plugin.png">
+<meta property="og:image" content="http://7xsstf.com2.z0.glb.clouddn.com/chrome-plugin1.png">
+<meta property="og:image" content="http://7xsstf.com2.z0.glb.clouddn.com/vysor-connection.png">
+<meta property="og:updated_time" content="2016-04-19T14:56:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Log不打印">
-<meta name="twitter:description" content="今天使用OkHttp访问网络,获取数据后,尝试打印获取到的数据,发现死活没有输出,断点调试的确是获取到了数据,然后尝试把对象打印出来,对象能打印,有点奇怪,但是对象中的数据打印不出来.后来发现是数据的问题,获取到的数据 response.body().string() 其实的值是:
+<meta name="twitter:title" content="Vysor:在电脑里控制你的安卓手机">
+<meta name="twitter:description" content="什么是VysorVysor是Chrome的一个插件,它可以实现用电脑显示和控制手机,并且延迟很小很小,不会像360,豌豆荚那么大.
+如何使用
+安装Chrome
+ 1.1 下载Chrome
+ 1.2 安装就不多说了.
 
-发现返回值的前面有个”\r\n”,难道是Log无法打印,后来试验真的是Log无法打印含有”\r\n”这样转义字符的">
-<meta name="twitter:image" content="http://7xsstf.com2.z0.glb.clouddn.com/Logcat%E6%97%A0%E8%BE%93%E5%87%BA.bmp">
+安装Vysor插件
+ 2.1 点击拓展程序 
+ 2.2 点击 获取更多扩展程序
+ 
+ 2.3 在 搜索框中 搜索 Vysor
+ 2.4 点击安装 即可
+
+安装VysorAPP
+ 3.">
+<meta name="twitter:image" content="http://7xsstf.com2.z0.glb.clouddn.com/chrome-plugin.png">
   
     <link rel="alternative" href="/atom.xml" title="zhouhaolong1" type="application/atom+xml">
   
@@ -248,11 +286,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-LogNoPrint" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-vysor" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/04/14/LogNoPrint/" class="article-date">
-      <time datetime="2016-04-14T13:50:15.000Z" itemprop="datePublished">2016-04-14</time>
+      <a href="/2016/04/19/vysor/" class="article-date">
+      <time datetime="2016-04-19T11:12:37.000Z" itemprop="datePublished">2016-04-19</time>
 </a>
     </div>
   
@@ -265,7 +303,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Log不打印
+      Vysor:在电脑里控制你的安卓手机
     </h1>
   
 
@@ -274,13 +312,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/android/">android</a>
+    <a class="article-category-link" href="/categories/Tools/">Tools</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Log/">Log</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vysor/">Vysor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/电脑控制手机/">电脑控制手机</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -290,11 +328,31 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>今天使用OkHttp访问网络,获取数据后,尝试打印获取到的数据,发现死活没有输出,断点调试的确是获取到了数据,然后尝试把对象打印出来,对象能打印,有点奇怪,但是对象中的数据打印不出来.后来发现是数据的问题,获取到的数据 response.body().string() 其实的值是:</p>
-<p><img src="http://7xsstf.com2.z0.glb.clouddn.com/Logcat%E6%97%A0%E8%BE%93%E5%87%BA.bmp" alt=""></p>
-<p>发现返回值的前面有个”\r\n”,难道是Log无法打印,后来试验真的是Log无法打印含有”\r\n”这样转义字符的字符串.</p>
-<p>代码如下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">getDataFromNet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//  创建一个okHttpClient对象</span></span><br><span class="line">    OkHttpClient okHttpClient = <span class="keyword">new</span> OkHttpClient();</span><br><span class="line">    <span class="comment">//  创建一个请求对象</span></span><br><span class="line">    Request request = <span class="keyword">new</span> Request.Builder().url(<span class="string">"http://japi.juhe.cn/funny/type.from?key=9efc31c185f5a8959e0e25771b3db102"</span>).build();</span><br><span class="line">    <span class="comment">//  把请求封装成任务</span></span><br><span class="line">    Call call = okHttpClient.newCall(request);</span><br><span class="line">    <span class="comment">//  把任务</span></span><br><span class="line">    call.enqueue(<span class="keyword">new</span> Callback() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(Call call, IOException e)</span> </span>&#123;</span><br><span class="line">            Log.d(TAG, call.toString());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(Call call, <span class="keyword">final</span> Response response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">            Log.d(TAG, response.toString());</span><br><span class="line">            String string = response.body().string();</span><br><span class="line">            Log.d(TAG, string);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="那么如何查看返回数据呢"><a href="#那么如何查看返回数据呢" class="headerlink" title="那么如何查看返回数据呢"></a>那么如何查看返回数据呢</h3><p>可以通过System.out.println(response.body().string());输出,但是这种方式不方便管理日志.不过呢,一般的返回的数据前面不会有”\r\n”.</p>
+        <h3 id="什么是Vysor"><a href="#什么是Vysor" class="headerlink" title="什么是Vysor"></a>什么是Vysor</h3><p>Vysor是Chrome的一个插件,它可以实现用电脑显示和控制手机,并且延迟很小很小,不会像360,豌豆荚那么大.</p>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><ol>
+<li><p>安装Chrome</p>
+<p> 1.1 <a href="http://www.google.cn/intl/zh-CN/chrome/browser/desktop/index.html" target="_blank" rel="external">下载Chrome</a></p>
+<p> 1.2 安装就不多说了.</p>
+</li>
+<li><p>安装Vysor插件</p>
+<p> 2.1 点击拓展程序<br> <img src="http://7xsstf.com2.z0.glb.clouddn.com/chrome-plugin.png" alt=""></p>
+<p> 2.2 点击 获取更多扩展程序</p>
+<p> <img src="http://7xsstf.com2.z0.glb.clouddn.com/chrome-plugin1.png" alt=""></p>
+<p> 2.3 在 搜索框中 搜索 Vysor</p>
+<p> 2.4 点击安装 即可</p>
+</li>
+<li><p>安装VysorAPP</p>
+<p> 3.1 用数据线把手机和电脑连接起来,就会弹出</p>
+<p> <img src="http://7xsstf.com2.z0.glb.clouddn.com/vysor-connection.png" alt=""></p>
+<p> 3.2 点击 “确认” 即完成安装.</p>
+</li>
+</ol>
+<h3 id="Vysor有什么具体的用途"><a href="#Vysor有什么具体的用途" class="headerlink" title="Vysor有什么具体的用途"></a>Vysor有什么具体的用途</h3><ol>
+<li><p>可以通过Vysor演示app</p>
+</li>
+<li><p>帮助不会使用手机的人,做一些远程操作.比如,我老爸想在手机上下载什么软件,或者手机设置调乱了,可以先远程他的电脑,然后通过Vysor控制他的手机.远离家的我,就通过这样帮助他解决.</p>
+</li>
+</ol>
 
       
     </div>
@@ -307,15 +365,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/04/18/as-shortcut-key/">
-                    AndroidStudio 快捷键
+                <a href="/2016/04/19/gradle-packaging/">
+                    AndroidStudio Gradle多渠道打包
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/04/09/android-looper/">
-                    Android中的Looper的使用
+                <a href="/2016/04/18/as-shortcut-key/">
+                    AndroidStudio 快捷键
                 </a>
             </div>
         
@@ -326,7 +384,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#那么如何查看返回数据呢"><span class="toc-number">1.</span> <span class="toc-text">那么如何查看返回数据呢</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Vysor"><span class="toc-number">1.</span> <span class="toc-text">什么是Vysor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何使用"><span class="toc-number">2.</span> <span class="toc-text">如何使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vysor有什么具体的用途"><span class="toc-number">3.</span> <span class="toc-text">Vysor有什么具体的用途</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -383,7 +441,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Log不打印　| zhouhaolong1　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Vysor:在电脑里控制你的安卓手机　| zhouhaolong1　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -399,7 +457,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/04/14/LogNoPrint/" data-title="Log不打印" data-url="http://yoursite.com/2016/04/14/LogNoPrint/"></div>
+    <div class="ds-thread" data-thread-key="2016/04/19/vysor/" data-title="Vysor:在电脑里控制你的安卓手机" data-url="http://yoursite.com/2016/04/19/vysor/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -423,7 +481,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/04/18/as-shortcut-key/" title="上一篇: AndroidStudio 快捷键">
+            <a href="/2016/04/19/gradle-packaging/" title="上一篇: AndroidStudio Gradle多渠道打包">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -431,7 +489,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/04/09/android-looper/" title="下一篇: Android中的Looper的使用">
+            <a href="/2016/04/18/as-shortcut-key/" title="下一篇: AndroidStudio 快捷键">
                 <i class="fa fa-angle-right"></i>
             </a>
         

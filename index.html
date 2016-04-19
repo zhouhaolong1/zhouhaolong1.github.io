@@ -166,7 +166,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidStudio/">AndroidStudio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Looper/">Looper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UnitTest/">UnitTest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单元测试/">单元测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮询线程/">轮询线程</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidStudio/">AndroidStudio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Looper/">Looper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UnitTest/">UnitTest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vysor/">Vysor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单元测试/">单元测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/电脑控制手机/">电脑控制手机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮询线程/">轮询线程</a></li></ul>
                     </div>
                 </section>
                 
@@ -244,11 +244,204 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-gradle-packaging" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/19/gradle-packaging/" class="article-date">
+      <time datetime="2016-04-19T11:35:33.000Z" itemprop="datePublished">2016-04-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/19/gradle-packaging/">AndroidStudio Gradle多渠道打包</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <blockquote>
+<p>本文以友盟进行多渠道打包为例</p>
+</blockquote>
+<h3 id="什么是渠道包"><a href="#什么是渠道包" class="headerlink" title="什么是渠道包"></a>什么是渠道包</h3><p>渠道包为各个应用市场打的包,在清单文件中,通过meta-data标签,进行标识,如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta-data</span><br><span class="line">	android:name=<span class="string">"UMENG_CHANNEL"</span></span><br><span class="line">	android:value=<span class="string">"$&#123;UMENG_CHANNEL_VALUE&#125;"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="渠道包的作用"><a href="#渠道包的作用" class="headerlink" title="渠道包的作用"></a>渠道包的作用</h3><p>主要是用来做统计的,统计各个平台app的下载和使用情况.如果你不需要统计,完全不用打渠道包.</p>
+<h3 id="Gradle如何打渠道包"><a href="#Gradle如何打渠道包" class="headerlink" title="Gradle如何打渠道包"></a>Gradle如何打渠道包</h3><ul>
+<li>首先在AndroidManifest.xml里配置渠道</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta-data</span><br><span class="line">   android:name=<span class="string">"UMENG_CHANNEL"</span></span><br><span class="line">   android:value=<span class="string">"$&#123;UMENG_CHANNEL_VALUE&#125;"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在可运行的module中的build.gradle设置productFlavors,这个productFlavors是渠道列表</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">productFlavors &#123;</span><br><span class="line">       website &#123;</span><br><span class="line">           manifestPlaceholders = [UMENG_CHANNEL_VALUE: <span class="string">"website"</span>,UNIONID_VALUE: <span class="string">"1110"</span>]</span><br><span class="line">       &#125;</span><br><span class="line">       cpd_xiaomi &#123;</span><br><span class="line">           manifestPlaceholders = [UMENG_CHANNEL_VALUE: <span class="string">"cpd_xiaomi"</span>,UNIONID_VALUE: <span class="string">"1111"</span>]</span><br><span class="line">       &#125;</span><br><span class="line">       cpd_360 &#123;</span><br><span class="line">           manifestPlaceholders = [UMENG_CHANNEL_VALUE: <span class="string">"cpd_360"</span>,UNIONID_VALUE: <span class="string">"1112"</span>]</span><br><span class="line">       &#125;</span><br><span class="line">       cpd_lenovo &#123;</span><br><span class="line">           manifestPlaceholders = [UMENG_CHANNEL_VALUE: <span class="string">"cpd_lenovo"</span>,UNIONID_VALUE: <span class="string">"1113"</span>]</span><br><span class="line">       &#125;</span><br><span class="line">       website&#123;&#125;</span><br><span class="line">       pt_91zhushou&#123;&#125;</span><br><span class="line">       pt_anzhuoshichang&#123;&#125;</span><br><span class="line">       productFlavors.all &#123;</span><br><span class="line">           flavor-&gt;flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在Terminal中执行gradlew clean</li>
+<li>再在Terminal中执行gradlew assembleRelease 就ok了.</li>
+</ul>
+<p><img src="http://7xsstf.com2.z0.glb.clouddn.com/packaging_result.png" alt=""></p>
+<p>Android运用Gradle build后生成的app-debug-unaligned.apk是生成release包的中间产物.</p>
+<h3 id="为什么要使用gradlew命令而不是gradle命令"><a href="#为什么要使用gradlew命令而不是gradle命令" class="headerlink" title="为什么要使用gradlew命令而不是gradle命令"></a>为什么要使用gradlew命令而不是gradle命令</h3><p>在工程目录下有一个gradle文件夹，在gradle/wrapper目录下有一个gradle-wrapper.properties文件，打开它：<br>如图:</p>
+<p><img src="http://7xsstf.com2.z0.glb.clouddn.com/gradle-wrapper.PNG" alt=""></p>
+<p>上图代表着这个工程所依赖的gradle的版本信息。上图的细线方框表示，如果我们的工程中没有gradle，软件会根据这个url去下载gradle，终于知道为啥第一次打开AS时会这么慢了吧？</p>
+<p>如果我们执行了gradlew命令，实际上是执行上面的gradle wrapper，然后找到我们已经下载好的gradle 2.2.1。如果现在有很多个工程，但是每个工程的gradle版本都不一样，我就必须要将每个版本的gradle都要配置到环境变量当中，而执行了gradlew命令，就会避免这个麻烦。</p>
+<h3 id="gradle的常用命令"><a href="#gradle的常用命令" class="headerlink" title="gradle的常用命令"></a>gradle的常用命令</h3><ol>
+<li><p>gradlew clean 删除 项目/app/build文件夹</p>
+</li>
+<li><p>gradlew build 检查依赖并编译打包这里注意的是 ./gradlew build 命令把debug、release环境的包都打出来，生成的包在目录 项目app/build/outputs/apk/下</p>
+</li>
+<li><p>gradlew assembleDebug 编译并打Debug包</p>
+</li>
+<li><p>gradlew assemblexiaomiDebug 编译并打xiaomi的debug包，其他类似(但是一般没有什么用)</p>
+</li>
+<li><p><strong>gradlew assembleRelease 编译并打Release的包</strong> (比较常用)</p>
+</li>
+<li><p>gradlew assemblexiaomiRelease 编译并打xiaomi的Release包，其他类似</p>
+</li>
+<li><p>gradlew installRelease Release模式打包并安装</p>
+</li>
+<li><p>gradlew uninstallRelease 卸载Release模式包</p>
+</li>
+</ol>
+<h3 id="我的完整的gradle配置"><a href="#我的完整的gradle配置" class="headerlink" title="我的完整的gradle配置"></a>我的完整的gradle配置</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: <span class="string">'com.android.application'</span></span><br><span class="line"><span class="comment">//获取当前时间</span></span><br><span class="line"><span class="function">def <span class="title">buildTime</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    def date = <span class="keyword">new</span> Date()</span><br><span class="line">    def formattedDate = date.format(<span class="string">'yyyyMMdd'</span>)</span><br><span class="line">    <span class="keyword">return</span> formattedDate</span><br><span class="line">&#125;</span><br><span class="line">android &#123;</span><br><span class="line"></span><br><span class="line">    dexOptions &#123;</span><br><span class="line">        javaMaxHeapSize <span class="string">"4g"</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    signingConfigs &#123;</span><br><span class="line">        debug &#123;</span><br><span class="line">            <span class="comment">// No debug config</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        release &#123;</span><br><span class="line">            <span class="function">storeFile <span class="title">file</span><span class="params">(<span class="string">'../your key'</span>)</span></span><br><span class="line">            storePassword "your password"</span><br><span class="line">            keyAlias "your alias"</span><br><span class="line">            keyPassword "your password"</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    compileSdkVersion 22</span><br><span class="line">    buildToolsVersion '23.0.2'</span><br><span class="line"></span><br><span class="line">    defaultConfig </span>&#123;</span><br><span class="line">        applicationId <span class="string">"your application package name"</span></span><br><span class="line">        minSdkVersion <span class="number">8</span></span><br><span class="line">        targetSdkVersion <span class="number">23</span></span><br><span class="line">        versionCode <span class="number">1</span></span><br><span class="line">        versionName <span class="string">"1.0"</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// dex突破65535的限制</span></span><br><span class="line">        multiDexEnabled <span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 默认渠道</span></span><br><span class="line">        manifestPlaceholders = [UMENG_CHANNEL_VALUE: <span class="string">"web"</span>]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//忽略lint异常</span></span><br><span class="line">    lintOptions &#123;</span><br><span class="line">        abortOnError <span class="keyword">false</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        debug &#123; <span class="comment">// 显示Log</span></span><br><span class="line"><span class="comment">//            buildConfigField "boolean", "LOG_DEBUG", "true"</span></span><br><span class="line"><span class="comment">//            versionNameSuffix "-debug"</span></span><br><span class="line"><span class="comment">//            minifyEnabled false</span></span><br><span class="line"><span class="comment">//            zipAlignEnabled false</span></span><br><span class="line"><span class="comment">//            shrinkResources false</span></span><br><span class="line"><span class="comment">//            signingConfig signingConfigs.debug</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        release &#123;</span><br><span class="line">            <span class="comment">//是否进行混淆</span></span><br><span class="line">            minifyEnabled <span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">            zipAlignEnabled <span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 移除无用的resource文件</span></span><br><span class="line">            shrinkResources <span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//启用签名配置</span></span><br><span class="line">            signingConfig signingConfigs.release</span><br><span class="line"></span><br><span class="line">            <span class="comment">//混淆文件的位置</span></span><br><span class="line">            <span class="function">proguardFiles <span class="title">getDefaultProguardFile</span><span class="params">(<span class="string">'proguard-android.txt'</span>)</span>, 'proguard-project.txt'</span><br><span class="line">			</span><br><span class="line">			<span class="comment">// 修改打包之后的名字</span></span><br><span class="line">            applicationVariants.all </span>&#123; variant -&gt;</span><br><span class="line">                variant.outputs.each &#123; output -&gt;</span><br><span class="line">                    <span class="keyword">if</span> (output.outputFile != <span class="keyword">null</span> &amp;&amp; output.outputFile.name.endsWith(<span class="string">'.apk'</span>)</span><br><span class="line">                            &amp;&amp;<span class="string">'release'</span>.equals(variant.buildType.name)) &#123;</span><br><span class="line">                        def apkFile = <span class="keyword">new</span> File(</span><br><span class="line">                                output.outputFile.getParent(),</span><br><span class="line">                                <span class="string">"SafePeriodphone_$&#123;variant.flavorName&#125;_v$&#123;variant.versionName&#125;_$&#123;buildTime()&#125;_release.apk"</span>)</span><br><span class="line">                        output.outputFile = apkFile</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//渠道列表</span></span><br><span class="line">    productFlavors &#123;</span><br><span class="line">        pt_91zhushou &#123;&#125;</span><br><span class="line">        pt_anzhuoshichang &#123;&#125;</span><br><span class="line">        pt_anzhi &#123;&#125;</span><br><span class="line">        pt_tencent &#123;&#125;</span><br><span class="line">        pt_mumayi &#123;&#125;</span><br><span class="line">        pt_wandoujia &#123;&#125;</span><br><span class="line">        pt_360shouji &#123;&#125;</span><br><span class="line">        pt_baidu &#123;&#125;</span><br><span class="line">        pt_xiaomi &#123;&#125;</span><br><span class="line">        pt_meizu &#123;&#125;</span><br><span class="line">        pt_huawei &#123;&#125;</span><br><span class="line">        pt_web &#123;&#125;</span><br><span class="line">        pt_zonghe &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//指定渠道名</span></span><br><span class="line">    productFlavors.all &#123;</span><br><span class="line">        flavor -&gt; flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    <span class="function">compile <span class="title">project</span><span class="params">(<span class="string">':xxlib'</span>)</span></span><br><span class="line">    compile <span class="title">files</span><span class="params">(<span class="string">'libs/nineoldandroids-2.4.0.jar'</span>)</span></span><br><span class="line">    compile <span class="title">files</span><span class="params">(<span class="string">'libs/picasso-2.3.1.jar'</span>)</span></span><br><span class="line">    compile <span class="title">files</span><span class="params">(<span class="string">'libs/viewpagertransformslibrary.jar'</span>)</span></span><br><span class="line">&#125;</span><br><span class="line"></span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考文献 <a href="http://www.cnblogs.com/smyhvae/p/4456420.html" target="_blank" rel="external">http://www.cnblogs.com/smyhvae/p/4456420.html</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/AndroidStudio/">AndroidStudio</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AndroidStudio/">AndroidStudio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-vysor" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/19/vysor/" class="article-date">
+      <time datetime="2016-04-19T11:12:37.000Z" itemprop="datePublished">2016-04-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/19/vysor/">Vysor:在电脑里控制你的安卓手机</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="什么是Vysor"><a href="#什么是Vysor" class="headerlink" title="什么是Vysor"></a>什么是Vysor</h3><p>Vysor是Chrome的一个插件,它可以实现用电脑显示和控制手机,并且延迟很小很小,不会像360,豌豆荚那么大.</p>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><ol>
+<li><p>安装Chrome</p>
+<p> 1.1 <a href="http://www.google.cn/intl/zh-CN/chrome/browser/desktop/index.html" target="_blank" rel="external">下载Chrome</a></p>
+<p> 1.2 安装就不多说了.</p>
+</li>
+<li><p>安装Vysor插件</p>
+<p> 2.1 点击拓展程序<br> <img src="http://7xsstf.com2.z0.glb.clouddn.com/chrome-plugin.png" alt=""></p>
+<p> 2.2 点击 获取更多扩展程序</p>
+<p> <img src="http://7xsstf.com2.z0.glb.clouddn.com/chrome-plugin1.png" alt=""></p>
+<p> 2.3 在 搜索框中 搜索 Vysor</p>
+<p> 2.4 点击安装 即可</p>
+</li>
+<li><p>安装VysorAPP</p>
+<p> 3.1 用数据线把手机和电脑连接起来,就会弹出</p>
+<p> <img src="http://7xsstf.com2.z0.glb.clouddn.com/vysor-connection.png" alt=""></p>
+<p> 3.2 点击 “确认” 即完成安装.</p>
+</li>
+</ol>
+<h3 id="Vysor有什么具体的用途"><a href="#Vysor有什么具体的用途" class="headerlink" title="Vysor有什么具体的用途"></a>Vysor有什么具体的用途</h3><ol>
+<li><p>可以通过Vysor演示app</p>
+</li>
+<li><p>帮助不会使用手机的人,做一些远程操作.比如,我老爸想在手机上下载什么软件,或者手机设置调乱了,可以先远程他的电脑,然后通过Vysor控制他的手机.远离家的我,就通过这样帮助他解决.</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Tools/">Tools</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vysor/">Vysor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/电脑控制手机/">电脑控制手机</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-as-shortcut-key" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/04/18/as-shortcut-key/" class="article-date">
-      <time datetime="2016-04-18T15:33:30.499Z" itemprop="datePublished">2016-04-18</time>
+      <time datetime="2016-04-18T14:41:11.000Z" itemprop="datePublished">2016-04-18</time>
 </a>
     </div>
   
@@ -426,29 +619,8 @@
         <p>今天使用OkHttp访问网络,获取数据后,尝试打印获取到的数据,发现死活没有输出,断点调试的确是获取到了数据,然后尝试把对象打印出来,对象能打印,有点奇怪,但是对象中的数据打印不出来.后来发现是数据的问题,获取到的数据 response.body().string() 其实的值是:</p>
 <p><img src="http://7xsstf.com2.z0.glb.clouddn.com/Logcat%E6%97%A0%E8%BE%93%E5%87%BA.bmp" alt=""></p>
 <p>发现返回值的前面有个”\r\n”,难道是Log无法打印,后来试验真的是Log无法打印含有”\r\n”这样转义字符的字符串.</p>
-<p>代码如下:</p>
-<pre><code>private void getDataFromNet() {
-    //  创建一个okHttpClient对象
-    OkHttpClient okHttpClient = new OkHttpClient();
-    //  创建一个请求对象
-    Request request = new Request.Builder().url(&quot;http://japi.juhe.cn/funny/type.from?key=9efc31c185f5a8959e0e25771b3db102&quot;).build();
-    //  把请求封装成任务
-    Call call = okHttpClient.newCall(request);
-    //  把任务
-    call.enqueue(new Callback() {
-        @Override
-        public void onFailure(Call call, IOException e) {
-            Log.d(TAG, call.toString());
-        }
-        @Override
-        public void onResponse(Call call, final Response response) throws IOException {
-            Log.d(TAG, response.toString());
-            String string = response.body().string();
-            Log.d(TAG, string);
-        }
-    });
-}
-</code></pre><h3 id="那么如何查看返回数据呢"><a href="#那么如何查看返回数据呢" class="headerlink" title="那么如何查看返回数据呢"></a>那么如何查看返回数据呢</h3><p>可以通过System.out.println(response.body().string());输出,但是这种方式不方便管理日志.不过呢,一般的返回的数据前面不会有”\r\n”.</p>
+<p>代码如下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">getDataFromNet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//  创建一个okHttpClient对象</span></span><br><span class="line">    OkHttpClient okHttpClient = <span class="keyword">new</span> OkHttpClient();</span><br><span class="line">    <span class="comment">//  创建一个请求对象</span></span><br><span class="line">    Request request = <span class="keyword">new</span> Request.Builder().url(<span class="string">"http://japi.juhe.cn/funny/type.from?key=9efc31c185f5a8959e0e25771b3db102"</span>).build();</span><br><span class="line">    <span class="comment">//  把请求封装成任务</span></span><br><span class="line">    Call call = okHttpClient.newCall(request);</span><br><span class="line">    <span class="comment">//  把任务</span></span><br><span class="line">    call.enqueue(<span class="keyword">new</span> Callback() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(Call call, IOException e)</span> </span>&#123;</span><br><span class="line">            Log.d(TAG, call.toString());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(Call call, <span class="keyword">final</span> Response response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">            Log.d(TAG, response.toString());</span><br><span class="line">            String string = response.body().string();</span><br><span class="line">            Log.d(TAG, string);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="那么如何查看返回数据呢"><a href="#那么如何查看返回数据呢" class="headerlink" title="那么如何查看返回数据呢"></a>那么如何查看返回数据呢</h3><p>可以通过System.out.println(response.body().string());输出,但是这种方式不方便管理日志.不过呢,一般的返回的数据前面不会有”\r\n”.</p>
 
       
     </div>
@@ -534,116 +706,11 @@
 <p>当调用loop()方法之后,这个Loopper线程就真正的开始工作了,不断的从自己的MessageQueue中取出Message,然后处理</p>
 <p>从上图中,我们可以发现 Looper Thread中只有一个Looper,可以有多个Handler.</p>
 <h3 id="什么情况下使用-Looper-线程"><a href="#什么情况下使用-Looper-线程" class="headerlink" title="什么情况下使用 Looper 线程"></a>什么情况下使用 Looper 线程</h3><p>如果我们需要新建一个线程，并且这个线程要能够循环处理其他线程发来的消息事件，或者需要长期与其他线程进行复杂的交互，这时就需要用到Looper来给线程建立消息队列。</p>
-<h4 id="如何打造一个-Looper-线程"><a href="#如何打造一个-Looper-线程" class="headerlink" title="如何打造一个 Looper 线程"></a>如何打造一个 Looper 线程</h4><pre><code>public class LooperThread extends Thread {
-    @Override
-    public void run() {
-        // 为当前线程初始化Looper
-        Looper.prepare();
-
-        // ...异步执行的代码，实例化handler
-
-        // 开始循环处理消息队列
-        Looper.loop();
-    }
-}
-</code></pre><p>这样一个非常简单的Looper线程就打造好了.那么怎么接受其他线程发送的消息?</p>
+<h4 id="如何打造一个-Looper-线程"><a href="#如何打造一个-Looper-线程" class="headerlink" title="如何打造一个 Looper 线程"></a>如何打造一个 Looper 线程</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LooperThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 为当前线程初始化Looper</span></span><br><span class="line">        Looper.prepare();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// ...异步执行的代码，实例化handler</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 开始循环处理消息队列</span></span><br><span class="line">        Looper.loop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样一个非常简单的Looper线程就打造好了.那么怎么接受其他线程发送的消息?</p>
 <p>通过一个主线程向子线程发送消息的列子说明</p>
-<pre><code>package com.zhou.dell.dtest041101_statusbar;
-
-import android.app.Activity;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-
-/**
- * author：zhouhuai
- * version：v1.0
- * date: 2016/4/12
- * description: 通过主线程向子线程发送消息
- */
-public class TestActivity extends Activity {
-    private String TAG = TestActivity.class.getSimpleName();
-    private int sendCount = 0;   // 发送次数
-    private LooperThread looperThread;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // 开启线程
-        looperThread = new LooperThread();
-        looperThread.start();
-
-        Button bt = new Button(this);
-        bt.setText(&quot;点击我,从主线程发送到子线程消息&quot;);
-        bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Message message = Message.obtain();
-                message.arg1 = sendCount++;
-                Log.d(TAG, &quot;发送的handler的信息: &quot; + looperThread.getmHandler().toString());
-                looperThread.getmHandler().sendMessage(message);
-            }
-        });
-        setContentView(bt);
-
-    }
-
-    /**
-       当Activity 销毁时
-     */
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        looperThread.exit();
-        looperThread = null;
-    }
-
-    class LooperThread extends Thread {
-        private String TAG = LooperThread.class.getSimpleName();
-        private Handler mHandler;
-        private Looper mLooper;
-
-        public LooperThread() {
-            super();
-        }
-
-        @Override
-        public void run() {
-            super.run();
-            // 为当前线程初始化Looper
-            Looper.prepare();
-            mLooper = Looper.myLooper();
-            //Handler如果不带参数的默认构造函数：new Handler()，实际上是通Looper.myLooper()来获取当前线程中的消息循环,
-            mHandler = new Handler(mLooper) {
-                @Override
-                public void handleMessage(Message msg) {
-                    super.handleMessage(msg);
-                    Log.d(TAG, &quot;接收到的消息中的target对象的信息: &quot; + msg.getTarget());
-                    Log.d(TAG,  &quot;接受发送的内容&quot; + msg.arg1);
-                }
-            };
-            // 开始轮寻
-            Looper.loop();
-        }
-
-        public Handler getmHandler() {
-            return mHandler;
-        }
-
-        public void exit() {
-            if (mLooper != null) {
-                mLooper.quit();
-                mLooper = null;
-            }
-        }
-    }
-
-}
-</code></pre><p>运行之后点击按钮,打印出来的日志如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zhou.dell.dtest041101_statusbar;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.app.Activity;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.os.Handler;</span><br><span class="line"><span class="keyword">import</span> android.os.Looper;</span><br><span class="line"><span class="keyword">import</span> android.os.Message;</span><br><span class="line"><span class="keyword">import</span> android.util.Log;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.widget.Button;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * author：zhouhuai</span><br><span class="line"> * version：v1.0</span><br><span class="line"> * date: 2016/4/12</span><br><span class="line"> * description: 通过主线程向子线程发送消息</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String TAG = TestActivity.class.getSimpleName();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> sendCount = <span class="number">0</span>;   <span class="comment">// 发送次数</span></span><br><span class="line">    <span class="keyword">private</span> LooperThread looperThread;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        <span class="comment">// 开启线程</span></span><br><span class="line">        looperThread = <span class="keyword">new</span> LooperThread();</span><br><span class="line">        looperThread.start();</span><br><span class="line"></span><br><span class="line">        Button bt = <span class="keyword">new</span> Button(<span class="keyword">this</span>);</span><br><span class="line">        bt.setText(<span class="string">"点击我,从主线程发送到子线程消息"</span>);</span><br><span class="line">        bt.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">                Message message = Message.obtain();</span><br><span class="line">                message.arg1 = sendCount++;</span><br><span class="line">                Log.d(TAG, <span class="string">"发送的handler的信息: "</span> + looperThread.getmHandler().toString());</span><br><span class="line">                looperThread.getmHandler().sendMessage(message);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        setContentView(bt);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">       当Activity 销毁时</span><br><span class="line">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy();</span><br><span class="line">        looperThread.exit();</span><br><span class="line">        looperThread = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">LooperThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> String TAG = LooperThread.class.getSimpleName();</span><br><span class="line">        <span class="keyword">private</span> Handler mHandler;</span><br><span class="line">        <span class="keyword">private</span> Looper mLooper;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">LooperThread</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>.run();</span><br><span class="line">            <span class="comment">// 为当前线程初始化Looper</span></span><br><span class="line">            Looper.prepare();</span><br><span class="line">            mLooper = Looper.myLooper();</span><br><span class="line">			<span class="comment">//Handler如果不带参数的默认构造函数：new Handler()，实际上是通Looper.myLooper()来获取当前线程中的消息循环,</span></span><br><span class="line">            mHandler = <span class="keyword">new</span> Handler(mLooper) &#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">                    <span class="keyword">super</span>.handleMessage(msg);</span><br><span class="line">                    Log.d(TAG, <span class="string">"接收到的消息中的target对象的信息: "</span> + msg.getTarget());</span><br><span class="line">                    Log.d(TAG,  <span class="string">"接受发送的内容"</span> + msg.arg1);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;;</span><br><span class="line">            <span class="comment">// 开始轮寻</span></span><br><span class="line">            Looper.loop();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Handler <span class="title">getmHandler</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> mHandler;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">exit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (mLooper != <span class="keyword">null</span>) &#123;</span><br><span class="line">                mLooper.quit();</span><br><span class="line">                mLooper = <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行之后点击按钮,打印出来的日志如下</p>
 <p>04-12 20:27:15.172 11994-11994/com.zhou.dell.dtest041101_statusbar D/ViewRootImpl: ViewPostImeInputStage ACTION_DOWN</p>
 <p>04-12 20:27:15.262 11994-11994/com.zhou.dell.dtest041101_statusbar D/TestActivity: 发送的handler的信息: Handler (com.zhou.dell.dtest041101_statusbar.TestActivity$LooperThread$1) {3bf99b43}</p>
 <p>04-12 20:27:15.262 11994-12038/com.zhou.dell.dtest041101_statusbar D/LooperThread: 接收到的消息中的target对象的信息: Handler (com.zhou.dell.dtest041101_statusbar.TestActivity$LooperThread$1) {3bf99b43}</p>
@@ -748,9 +815,9 @@ public class TestActivity extends Activity {
  * description:计算
  */
 public class Compute {
-    public int add (int a , int b ) {
+     public int add (int a , int b ) {
         return a + b ;
-        }
+     }
 }
 </code></pre><p>在ApplicationTest的同级目录下（当然你可以自己创建一个文件夹）创建一个类继承<strong>InstrumentationTestCase</strong>，注意不是Instrumentation，代码如下：</p>
 <pre><code>package com.zhou.dell.dtest0408_unittest;        
