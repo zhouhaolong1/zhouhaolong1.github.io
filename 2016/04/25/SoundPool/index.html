@@ -3,26 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Log不打印 | zhouhaolong1</title>
+  <title>SoundPool使用 | zhouhaolong1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天使用OkHttp访问网络,获取数据后,尝试打印获取到的数据,发现死活没有输出,断点调试的确是获取到了数据,然后尝试把对象打印出来,对象能打印,有点奇怪,但是对象中的数据打印不出来.后来发现是数据的问题,获取到的数据 response.body().string() 其实的值是:
-
-发现返回值的前面有个”\r\n”,难道是Log无法打印,后来试验真的是Log无法打印含有”\r\n”这样转义字符的">
+  <meta name="description" content="MediaPlayer, VideoView, SoundPool的区别Android中可以播放音频的有MediaPlayer, VideoView, SoundPool他们的特点分别是:
+MediaPlayer: 资源占用多, 延迟较长, 不支持多个音频同时播放, 一般用于播放比较大的音频文件
+VideoView: 只能播放标准的MP4、3GP文件，其它格式的文件将无法播放
+SoundPool:">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Log不打印">
-<meta property="og:url" content="http://yoursite.com/2016/04/14/LogNoPrint/index.html">
+<meta property="og:title" content="SoundPool使用">
+<meta property="og:url" content="http://yoursite.com/2016/04/25/SoundPool/index.html">
 <meta property="og:site_name" content="zhouhaolong1">
-<meta property="og:description" content="今天使用OkHttp访问网络,获取数据后,尝试打印获取到的数据,发现死活没有输出,断点调试的确是获取到了数据,然后尝试把对象打印出来,对象能打印,有点奇怪,但是对象中的数据打印不出来.后来发现是数据的问题,获取到的数据 response.body().string() 其实的值是:
-
-发现返回值的前面有个”\r\n”,难道是Log无法打印,后来试验真的是Log无法打印含有”\r\n”这样转义字符的">
-<meta property="og:image" content="http://7xsstf.com2.z0.glb.clouddn.com/Logcat%E6%97%A0%E8%BE%93%E5%87%BA.bmp">
-<meta property="og:updated_time" content="2016-04-19T14:57:52.000Z">
+<meta property="og:description" content="MediaPlayer, VideoView, SoundPool的区别Android中可以播放音频的有MediaPlayer, VideoView, SoundPool他们的特点分别是:
+MediaPlayer: 资源占用多, 延迟较长, 不支持多个音频同时播放, 一般用于播放比较大的音频文件
+VideoView: 只能播放标准的MP4、3GP文件，其它格式的文件将无法播放
+SoundPool:">
+<meta property="og:updated_time" content="2016-06-02T11:34:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Log不打印">
-<meta name="twitter:description" content="今天使用OkHttp访问网络,获取数据后,尝试打印获取到的数据,发现死活没有输出,断点调试的确是获取到了数据,然后尝试把对象打印出来,对象能打印,有点奇怪,但是对象中的数据打印不出来.后来发现是数据的问题,获取到的数据 response.body().string() 其实的值是:
-
-发现返回值的前面有个”\r\n”,难道是Log无法打印,后来试验真的是Log无法打印含有”\r\n”这样转义字符的">
-<meta name="twitter:image" content="http://7xsstf.com2.z0.glb.clouddn.com/Logcat%E6%97%A0%E8%BE%93%E5%87%BA.bmp">
+<meta name="twitter:title" content="SoundPool使用">
+<meta name="twitter:description" content="MediaPlayer, VideoView, SoundPool的区别Android中可以播放音频的有MediaPlayer, VideoView, SoundPool他们的特点分别是:
+MediaPlayer: 资源占用多, 延迟较长, 不支持多个音频同时播放, 一般用于播放比较大的音频文件
+VideoView: 只能播放标准的MP4、3GP文件，其它格式的文件将无法播放
+SoundPool:">
   
     <link rel="alternative" href="/atom.xml" title="zhouhaolong1" type="application/atom+xml">
   
@@ -248,11 +249,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-LogNoPrint" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-SoundPool" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/04/14/LogNoPrint/" class="article-date">
-      <time datetime="2016-04-14T13:50:15.000Z" itemprop="datePublished">2016-04-14</time>
+      <a href="/2016/04/25/SoundPool/" class="article-date">
+      <time datetime="2016-04-24T16:00:00.000Z" itemprop="datePublished">2016-04-25</time>
 </a>
     </div>
   
@@ -265,7 +266,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Log不打印
+      SoundPool使用
     </h1>
   
 
@@ -280,7 +281,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Log/">Log</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SoundPool/">SoundPool</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -290,11 +291,44 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>今天使用OkHttp访问网络,获取数据后,尝试打印获取到的数据,发现死活没有输出,断点调试的确是获取到了数据,然后尝试把对象打印出来,对象能打印,有点奇怪,但是对象中的数据打印不出来.后来发现是数据的问题,获取到的数据 response.body().string() 其实的值是:</p>
-<p><img src="http://7xsstf.com2.z0.glb.clouddn.com/Logcat%E6%97%A0%E8%BE%93%E5%87%BA.bmp" alt=""></p>
-<p>发现返回值的前面有个”\r\n”,难道是Log无法打印,后来试验真的是Log无法打印含有”\r\n”这样转义字符的字符串.</p>
-<p>代码如下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">getDataFromNet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//  创建一个okHttpClient对象</span></span><br><span class="line">    OkHttpClient okHttpClient = <span class="keyword">new</span> OkHttpClient();</span><br><span class="line">    <span class="comment">//  创建一个请求对象</span></span><br><span class="line">    Request request = <span class="keyword">new</span> Request.Builder().url(<span class="string">"http://japi.juhe.cn/funny/type.from?key=9efc31c185f5a8959e0e25771b3db102"</span>).build();</span><br><span class="line">    <span class="comment">//  把请求封装成任务</span></span><br><span class="line">    Call call = okHttpClient.newCall(request);</span><br><span class="line">    <span class="comment">//  把任务</span></span><br><span class="line">    call.enqueue(<span class="keyword">new</span> Callback() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(Call call, IOException e)</span> </span>&#123;</span><br><span class="line">            Log.d(TAG, call.toString());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(Call call, <span class="keyword">final</span> Response response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">            Log.d(TAG, response.toString());</span><br><span class="line">            String string = response.body().string();</span><br><span class="line">            Log.d(TAG, string);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="那么如何查看返回数据呢"><a href="#那么如何查看返回数据呢" class="headerlink" title="那么如何查看返回数据呢"></a>那么如何查看返回数据呢</h3><p>可以通过System.out.println(response.body().string());输出,但是这种方式不方便管理日志.不过呢,一般的返回的数据前面不会有”\r\n”.</p>
+        <h3 id="MediaPlayer-VideoView-SoundPool的区别"><a href="#MediaPlayer-VideoView-SoundPool的区别" class="headerlink" title="MediaPlayer, VideoView, SoundPool的区别"></a>MediaPlayer, VideoView, SoundPool的区别</h3><p>Android中可以播放音频的有MediaPlayer, VideoView, SoundPool<br>他们的特点分别是:</p>
+<p>MediaPlayer: 资源占用多, 延迟较长, 不支持多个音频同时播放, 一般用于播放比较大的音频文件</p>
+<p>VideoView: 只能播放标准的MP4、3GP文件，其它格式的文件将无法播放</p>
+<p>SoundPool: 内存占用少, 延时少, 可以播放多个音频</p>
+<p>所以如果要播放短促、密集、延迟程度小的音频就要选择SoundPool</p>
+<h3 id="SoundPool的使用步骤"><a href="#SoundPool的使用步骤" class="headerlink" title="SoundPool的使用步骤"></a>SoundPool的使用步骤</h3><h4 id="Step-1-调用SoundPool的构造方法-创建SoundPool对象"><a href="#Step-1-调用SoundPool的构造方法-创建SoundPool对象" class="headerlink" title="Step 1. 调用SoundPool的构造方法, 创建SoundPool对象."></a>Step 1. 调用SoundPool的构造方法, 创建SoundPool对象.</h4><ul>
+<li>SoundPool的构造方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// maxStreams	最多同时播放多少个音频</span></span><br><span class="line"><span class="comment">// streamType	声音的类型</span></span><br><span class="line"><span class="comment">// srcQuality	声音品质</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">SoundPool</span><span class="params">(<span class="keyword">int</span> maxStreams, <span class="keyword">int</span> streamType, <span class="keyword">int</span> srcQuality)</span></span></span><br></pre></td></tr></table></figure>    
+<p>但是这种方式在API21之后已经被废弃了.</p>
+<ul>
+<li>新的构造SoundPool的步骤如下:</li>
+</ul>
+<ol>
+<li>获取SoundPool的Builder对象</li>
+<li>通过SoundPool.Builder对象调用setMaxStreams(int maxStreams)方法设置支持播放的音频的数量</li>
+<li><p>通过SoundPool.Builder对象调用setAudioAttributes(AudioAttributes attributes)方法设置音乐的类型,这里传入的AudioAttributes对象是通过AudioAttributes.Builder获取,代码如下: </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AudioAttributes.Builder audioAttributesBuilder = <span class="keyword">new</span> AudioAttributes.Builder();</span><br><span class="line">audioAttributesBuilder.setLegacyStreamType(AudioManager.STREAM_MUSIC);</span><br><span class="line">AudioAttributes audioAttributes = audioAttributesBuilder.build();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过SoundPool.Builder对象调用build()方法获得SoundPool对象</p>
+</li>
+</ol>
+<p>注意,这4步是也可以省略其中的2,3这两步,如果省略2,3步,那么maxStreams默认是1,而mAudioAttributes = new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).build();声音类型默认是媒体声音</p>
+<p><em>完美的SoundPool的构造方式如下</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(Build.VERSION.SDK_INT &gt; <span class="number">21</span>) &#123;</span><br><span class="line">    AudioAttributes.Builder audioAttributesBuilder = <span class="keyword">new</span> AudioAttributes.Builder();</span><br><span class="line">    audioAttributesBuilder.setLegacyStreamType(AudioManager.STREAM_MUSIC);</span><br><span class="line">    AudioAttributes audioAttributes = audioAttributesBuilder.build();</span><br><span class="line">    soundPool = <span class="keyword">new</span> SoundPool.Builder().setMaxStreams(<span class="number">4</span>).setAudioAttributes(audioAttributes).build();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    soundPool = <span class="keyword">new</span> SoundPool(<span class="number">4</span>, AudioManager.STREAM_MUSIC, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Step-2-调用SoundPool对象的load-方法从指定资源、文件中加载声音"><a href="#Step-2-调用SoundPool对象的load-方法从指定资源、文件中加载声音" class="headerlink" title="Step 2. 调用SoundPool对象的load()方法从指定资源、文件中加载声音."></a>Step 2. 调用SoundPool对象的load()方法从指定资源、文件中加载声音.</h4><ul>
+<li>创建好SoundPool对象之后可以调用load方法加载音频</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//从 resld 所对应的资源加载声音</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">load</span><span class="params">(Context context, <span class="keyword">int</span> resld, <span class="keyword">int</span> priority)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//加载 fd 所对应的文件的offset开始、长度为length的声音	</span></span><br><span class="line"><span class="keyword">int</span> <span class="title">load</span><span class="params">(FileDescriptor fd, <span class="keyword">long</span> offset, <span class="keyword">long</span> length, <span class="keyword">int</span> priority)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//从afd 所对应的文件中加载声音</span></span><br><span class="line"><span class="keyword">int</span> <span class="title">load</span><span class="params">(AssetFileDescriptor afd, <span class="keyword">int</span> priority)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//从path 对应的文件去加载声音</span></span><br><span class="line"><span class="keyword">int</span> <span class="title">load</span><span class="params">(String path, <span class="keyword">int</span> priority)</span></span></span><br></pre></td></tr></table></figure>
+<p>这四个方法都有一个int类型的priority参数,这个参数目前暂时没有用到,推荐使用1,用来保持和未来的兼容,并且都会反回一个int值的音频ID,SoundPool对象是通过这个ID播放指定的音频的</p>
+<h4 id="Step-3-调用SoundPool对象的播放方法-播放音频"><a href="#Step-3-调用SoundPool对象的播放方法-播放音频" class="headerlink" title="Step 3. 调用SoundPool对象的播放方法, 播放音频."></a>Step 3. 调用SoundPool对象的播放方法, 播放音频.</h4><ul>
+<li>播放</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// soundID 		就是load方法返回的音频ID,</span></span><br><span class="line"><span class="comment">// leftVolume 	是左声道 取值 0.0~1.0 </span></span><br><span class="line"><span class="comment">// rightVolume	是右声道 取值 0.0~1.0</span></span><br><span class="line"><span class="comment">// priority 	优先级，0最低</span></span><br><span class="line"><span class="comment">// loop 		0代表不循环,-1代表无限循环</span></span><br><span class="line"><span class="comment">// rate 		播放速度，0.5-2.0之间。1.0为正常速度</span></span><br><span class="line"><span class="comment">// 如果播放成功返回一个非0的streamID,否则回返回0</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">play</span><span class="params">(<span class="keyword">int</span> soundID, <span class="keyword">float</span> leftVolume, <span class="keyword">float</span> rightVolume, <span class="keyword">int</span> priority, <span class="keyword">int</span> loop, <span class="keyword">float</span> rate)</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>SoundPool 适合播放短促,密集的音效,不适合播放背景音乐</li>
+<li>SoundPool 虽然比MediaPlayer效果好,但是也是有延迟,只不过比MediaPlayer小</li>
+</ul>
 
       
     </div>
@@ -306,16 +340,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/04/18/as-shortcut-key/">
-                    AndroidStudio 快捷键
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/04/09/android-looper/">
-                    Android中的Looper的使用
+                <a href="/2016/04/23/handler-looper-message/">
+                    Handler Looper Message 之间的关系
                 </a>
             </div>
         
@@ -326,7 +354,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#那么如何查看返回数据呢"><span class="toc-number">1.</span> <span class="toc-text">那么如何查看返回数据呢</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#MediaPlayer-VideoView-SoundPool的区别"><span class="toc-number">1.</span> <span class="toc-text">MediaPlayer, VideoView, SoundPool的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SoundPool的使用步骤"><span class="toc-number">2.</span> <span class="toc-text">SoundPool的使用步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-1-调用SoundPool的构造方法-创建SoundPool对象"><span class="toc-number">2.1.</span> <span class="toc-text">Step 1. 调用SoundPool的构造方法, 创建SoundPool对象.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-2-调用SoundPool对象的load-方法从指定资源、文件中加载声音"><span class="toc-number">2.2.</span> <span class="toc-text">Step 2. 调用SoundPool对象的load()方法从指定资源、文件中加载声音.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-3-调用SoundPool对象的播放方法-播放音频"><span class="toc-number">2.3.</span> <span class="toc-text">Step 3. 调用SoundPool对象的播放方法, 播放音频.</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -383,7 +411,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Log不打印　| zhouhaolong1　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"SoundPool使用　| zhouhaolong1　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -399,7 +427,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/04/14/LogNoPrint/" data-title="Log不打印" data-url="http://yoursite.com/2016/04/14/LogNoPrint/"></div>
+    <div class="ds-thread" data-thread-key="2016/04/25/SoundPool/" data-title="SoundPool使用" data-url="http://yoursite.com/2016/04/25/SoundPool/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -423,15 +451,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/04/18/as-shortcut-key/" title="上一篇: AndroidStudio 快捷键">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/04/09/android-looper/" title="下一篇: Android中的Looper的使用">
+            <a href="/2016/04/23/handler-looper-message/" title="下一篇: Handler Looper Message 之间的关系">
                 <i class="fa fa-angle-right"></i>
             </a>
         
