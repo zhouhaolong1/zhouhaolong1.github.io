@@ -166,7 +166,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidStudio/">AndroidStudio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/">Handler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Looper/">Looper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SoundPool/">SoundPool</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UnitTest/">UnitTest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vysor/">Vysor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/andrdoi/">andrdoi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单元测试/">单元测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步加载/">异步加载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/电脑控制手机/">电脑控制手机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮询线程/">轮询线程</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidStudio/">AndroidStudio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/">Handler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LayoutInflater使用/">LayoutInflater使用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Looper/">Looper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SoundPool/">SoundPool</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UnitTest/">UnitTest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vysor/">Vysor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/andrdoi/">andrdoi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/login/">login</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单元测试/">单元测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步加载/">异步加载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/电脑控制手机/">电脑控制手机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮询线程/">轮询线程</a></li></ul>
                     </div>
                 </section>
                 
@@ -243,6 +243,79 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-kickLogin&amp;Device" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/07/kickLogin&Device/" class="article-date">
+      <time datetime="2016-06-06T16:00:00.000Z" itemprop="datePublished">2016-06-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/07/kickLogin&Device/">踢人踢设备</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>需求:<br>一. 账户不能同时在两个不同设备上登录<br>二. app只能在一台手机和一台pad上使用</p>
+<p>踢人踢设备都是在登录的时候发生的,后台根据登录的时候传的参数进行判断返回数据,所以先看看登录的时候要都提交的字段,那些基本的数据就不提了.</p>
+<ol>
+<li><p>appname 应用的简化名字+平台号<br>应用的简化名字 就是用来标识哪个应用, 可能公司有很多个不同的app, 这个名字就是用来标识不同的app的<br>平台号    就是标识是哪种设备, 比如 手机版是1, pad是9</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">* 判断是否是平板</span><br><span class="line">* <span class="doctag">@param</span> context</span><br><span class="line">* <span class="doctag">@return</span></span><br><span class="line">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isTablet</span><span class="params">(Context context)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (context.getResources().getConfiguration().screenLayout</span><br><span class="line">            &amp; Configuration.SCREENLAYOUT_SIZE_MASK)</span><br><span class="line">            &gt;= Configuration.SCREENLAYOUT_SIZE_LARGE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(isTablet(context)) &#123; </span><br><span class="line">   appName = <span class="string">"xx"</span> + <span class="string">"9"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mid 是设备的的唯一标识, 这个必须是唯一, 用来标识不同的设备, 先读取deviceid, 如果失败, 再读取androidid, deviceid -&gt; androidId-&gt; mac</p>
+</li>
+</ol>
+<h3 id="踢人"><a href="#踢人" class="headerlink" title="踢人"></a>踢人</h3><p>在后台开启一个子线程, 每隔2分钟访问一下检测的接口, 看是否这个账号登录了, 如果已经登录了, 那么就会发送一个广播, 静态广播接受者接收到发送的广播后, 会执行登出的操作. 然后提示跳转到登录界面, 提示用户多地登录了, 同时杀死这个检测的子线程</p>
+<h3 id="踢设备"><a href="#踢设备" class="headerlink" title="踢设备"></a>踢设备</h3><p>在登录的时候, 获取接口返回的code值, 判断是否是多设备登录, 如果是多设备登录, 提示用户弹出对话框, 提示用户注销掉之前的设备信息并且提交给改变设备的接口. 清除了的设备就不能再登录了, 如果再次在清除的设备上登录, 记得提示用户, “当前设备已经被禁用了, 无法登录”.</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这个踢人踢设备不是很难, 总的来说就是访问接口, 根据接口返回的不同code, 判断是哪种状态, 然后做相应的处理. 这个appname和mid这两个参数很重要, 后台就是根据这2个参数进行判断的.  </p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/android/">android</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/login/">login</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-SoundPool" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -1059,6 +1132,85 @@ public class ExampleTest extends InstrumentationTestCase {
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AndroidStudio/">AndroidStudio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UnitTest/">UnitTest</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单元测试/">单元测试</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Inflate" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/02/Inflate/" class="article-date">
+      <time datetime="2015-05-01T16:00:00.000Z" itemprop="datePublished">2015-05-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/02/Inflate/">LayoutInflater使用</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="什么是LayoutInflater使用"><a href="#什么是LayoutInflater使用" class="headerlink" title="什么是LayoutInflater使用"></a>什么是LayoutInflater使用</h3><p>LayoutInflater是一个填充器,主要是把xml布局填充成一个view对象</p>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><ul>
+<li>方法一 通过view的inflate方法把指定的xml填充成view对象</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// context 上下文</span></span><br><span class="line"><span class="comment">// resource 布局文件</span></span><br><span class="line"><span class="comment">// root 父视图</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> View <span class="title">inflate</span><span class="params">(Context context, @LayoutRes <span class="keyword">int</span> resource, ViewGroup root)</span></span></span><br></pre></td></tr></table></figure>
+<p>列如:    <code>View view = View.inflate(context, R.layout.xx, null);</code> </p>
+<ul>
+<li>方法二 先获取LayoutInflater对象,再调用inflate方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LayoutInflater inflater = LayoutInflater.from(<span class="keyword">this</span>);</span><br><span class="line">View view = inflater.inflate(R.layout.xx, <span class="keyword">null</span>);</span><br><span class="line"><span class="comment">// inflater.inflate()这个方法还有一个三个参数的重载方法, 最后一个boolean类型,</span></span><br><span class="line"><span class="comment">// 如果是true,代表把填充出来的view添加到父控件中,</span></span><br><span class="line"><span class="comment">// 如果是false不添加,那么可以手动添加到父控件中,调用父控件的addView方法就好了</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>方法三 通过系统的填充服务</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);</span><br><span class="line">View view = inflater.inflate(R.layout.xx, <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+<p>其实方法一是对方法二的封装,方法二是对方法三的封装.</p>
+<p>View.inflate()和LayoutInflater.from()的源码如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> View <span class="title">inflate</span><span class="params">(Context context, @LayoutRes <span class="keyword">int</span> resource, ViewGroup root)</span> </span>&#123;</span><br><span class="line">        LayoutInflater factory = LayoutInflater.from(context);</span><br><span class="line">        <span class="keyword">return</span> factory.inflate(resource, root);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span><br><span class="line">	 * Obtains the LayoutInflater from the given context.</span><br><span class="line">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> LayoutInflater <span class="title">from</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">	    LayoutInflater LayoutInflater =</span><br><span class="line">	            (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);</span><br><span class="line">	    <span class="keyword">if</span> (LayoutInflater == <span class="keyword">null</span>) &#123;</span><br><span class="line">	        <span class="keyword">throw</span> <span class="keyword">new</span> AssertionError(<span class="string">"LayoutInflater not found."</span>);</span><br><span class="line">	    &#125;</span><br><span class="line">	    <span class="keyword">return</span> LayoutInflater;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>所以没有必要使用第三种. </p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/android/">android</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LayoutInflater使用/">LayoutInflater使用</a></li></ul>
     </div>
 
       
